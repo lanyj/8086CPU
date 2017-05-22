@@ -1,0 +1,20 @@
+BUFFER:
+	SIZE			:	2 * PORT_SIZE
+
+Server:
+	publish:
+		2 * N		:	STATE
+		2 * N + 1	:	VALUE
+			
+	receive:
+		2 * N		:	INDEX
+		2 * N + 1	:	VALUE
+			
+Client:
+	send:
+		2 * N		:	INDEX
+		2 * N + 1	:	VALUE
+		
+	receive:
+		2 * N		:	STATE
+		2 * N + 1	:	VALUE
