@@ -31,9 +31,19 @@ public class BIU {
 	 */
 	public static final byte[] getInstruction() {
 		long address = generateIPAddress();
+		IP.updateIP();
 		byte[] low = Memoryer.read(address, false);
 		return low;
 //		return test_code[p_i++];
+	}
+	/**
+	 * get next instruction(one byte), without auto update IP
+	 * @return
+	 */
+	public static final byte[] peekInstruction() {
+		long address = generateIPAddress();
+		byte[] low = Memoryer.read(address, false);
+		return low;
 	}
 	
 	private static final long generateIPAddress() {
@@ -45,7 +55,6 @@ public class BIU {
 			_cs |= cs[i] << i;
 		}
 		address = _cs * Configer.getInstructionLength() + _ip;
-		IP.updateIP();
 		return address;
 	}
 	

@@ -6,18 +6,14 @@ import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.register.segmentregister.ES;
 import cn.jay.computer.register.segmentregister.SS;
 
-public class SegmentChanger extends AbstractExecuter {
+public class SegmentChanger extends Execution {
 
-	private static final byte[][] FEATURE = { { (byte) 0x26, 8 }, { (byte) 0x2E, 8 }, { (byte) 0x36, 8 },
-			{ (byte) 0x3E, 8 } };
-
-	public SegmentChanger() {
-		ExecuterMgr.addExecuter(this);
-		setFeature(FEATURE);
+	public SegmentChanger(String opcode, String operand, String describle, int index) {
+		super(opcode, operand, describle, index);
 	}
-
 	public void exec(byte code) {
-		int conn = isSame(code);
+		int conn = getIndex();
+		
 		switch (conn) {
 		case -1: {
 			break;

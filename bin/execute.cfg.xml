@@ -1,0 +1,57 @@
+<excutecode>
+	<datatransferoperation>
+		<category name="MOV">
+			<subcategory opcode="100010**" operand="(D)(W)(MOD)(REG)(R/M)">MOV reg/mem to/from reg</subcategory>
+			<subcategory opcode="1100011***000***" operand="(W)(MOD)(R/M)">MOV immed to reg/mem</subcategory>
+			<subcategory opcode="1011****" operand="(W)(REG)">MOV immed to reg</subcategory>
+			<subcategory opcode="101000**" operand="(D)(W)">MOV direct mem to/from acc</subcategory>
+			<subcategory opcode="100011*0**0*****" operand="(D)(MOD)(SEG)(R/M)">MOV reg/mem to/from seg</subcategory>
+		</category>
+		<category name="PUSH">
+			<subcategory opcode="11111111**110***" operand="(MOD)(R/M)">push reg/mem</subcategory>
+			<subcategory opcode="01010***" operand="(REG)">push reg</subcategory>
+			<subcategory opcode="000**110" operand="(SEG)">push seg</subcategory>
+		</category>
+		<category name="POP">
+			<subcategory opcode="10001111**000***" operand="(MOD)(R/M)">pop reg/mem</subcategory>
+			<subcategory opcode="01011***" operand="(REG)">pop reg</subcategory>
+			<subcategory opcode="000**111" operand="(SEG)">pop seg</subcategory>
+		</category>
+		<category name="XCHG">
+			<subcategory opcode="1000011*" operand="(W)(MODE)(REG)(R/M)">exchange reg/mem with reg</subcategory>
+			<subcategory opcode="10010***" operand="(REG)">exchange reg with acc</subcategory>
+		</category>
+		<category name="IN">
+			<subcategory opcode="1110010*" operand="(W)">input with fixed port</subcategory>
+			<subcategory opcode="1110110*" operand="(W)">input with variable port</subcategory>
+		</category>
+		<category name="OUT">
+			<subcategory opcode="1110011*" operand="(W)">output with fixed port</subcategory>
+			<subcategory opcode="1110111*" operand="(W)">output with variable port</subcategory>
+		</category>
+		<category name="XLAT">
+			<subcategory opcode="11010111" operand="">translate byte to AL</subcategory>
+		</category>
+		<category name="LEA">
+			<subcategory opcode="10001101" operand="(MOD)(REG)(R/M)">load EA to reg</subcategory>
+		</category>
+		<category name="LDS">
+			<subcategory opcode="11000101" operand="(MOD)(REG)(R/M)">load pointer to DS</subcategory>
+		</category>
+		<category name="LES">
+			<subcategory opcode="11000100" operand="(MOD)(REG)(R/M)">load pointer to ES</subcategory>
+		</category>
+		<category name="LAHF">
+			<subcategory opcode="10011111" operand="">load AH with flags</subcategory>
+		</category>
+		<category name="SAHF">
+			<subcategory opcode="10011110" operand="">store AH into flags</subcategory>
+		</category>
+		<category name="PUSHF">
+			<subcategory opcode="10011100" operand="">push flags</subcategory>
+		</category>
+		<category name="POPF">
+			<subcategory opcode="10011101" operand="">pop flags</subcategory>
+		</category>
+	</datatransferoperation>
+</excutecode>

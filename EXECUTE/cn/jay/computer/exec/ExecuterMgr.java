@@ -1,31 +1,76 @@
 package cn.jay.computer.exec;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class ExecuterMgr implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1787905806224859260L;
-	public static CopyOnWriteArrayList<AbstractExecuter> executer = new CopyOnWriteArrayList<AbstractExecuter>();
-
+	
+	public static ArrayList<Execution> abstractExecuters = new ArrayList<>();
+	public static ArrayList<String> executerNames = new ArrayList<>();
+	
+	private static Document document = null;
+	static {
+		try {
+			document = Jsoup.parse(new File(System.getProperty("user.dir") + "/EXECUTE/execute.cfg.xml"),"utf-8");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Elements es = document.getElementsByTag("datatransferoperation");
+		Elements cs = es.get(0).children();
+		for(int i = 0;i < cs.size();i++) {
+			String name = cs.get(i).attr("name");
+			Elements ss = cs.get(i).children();
+			for(int j = 0;j < ss.size();j++) {
+				Execution ec = null;
+				try {
+					ec = (Execution) Class.forName("cn.jay.computer.exec.datatransferoperation." + name).getConstructors()[0].newInstance(ss.get(j).attr("opcode"), ss.get(j).attr("operand"), ss.get(j).text(), j);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | SecurityException | ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(ec != null)
+					addExecuter(name, ec);
+			}
+		}
+	}
+	
+	public static Elements getElements(String name) {
+		Elements elements = document.getElementsByAttributeValue("name", name);
+		return elements;
+	}
+	
 	/**
 	 * add executer to executerManager
 	 * 
-	 * @param executer
 	 */
-	public static void addExecuter(AbstractExecuter executer) {
-		ExecuterMgr.executer.add(executer);
+	public static void addExecuter(String name, Execution executer) {
+		ExecuterMgr.executerNames.add(name);
+		ExecuterMgr.abstractExecuters.add(executer);
 	}
 
 	/**
 	 * remove executer
 	 * 
-	 * @param executer
 	 */
-	public static void removeExecuter(AbstractExecuter executer) {
-		ExecuterMgr.executer.remove(executer);
+	public static void removeExecuter(String name) {
+		int i = executerNames.indexOf(name);
+		if(i >= 0) {
+			executerNames.remove(i);
+			abstractExecuters.remove(i);
+		}
 	}
 
 	/**
@@ -33,13 +78,26 @@ public class ExecuterMgr implements Serializable {
 	 * 
 	 * @param code
 	 */
-	public static void exec(byte[] code) {
-		for (AbstractExecuter executer : ExecuterMgr.executer) {
-			if (executer.isSame(code) >= 0) {
-				System.out.println(executer);
-				executer.exec(code);
+	public static void exec(byte[] c1, byte[] c2) {
+		String s1 = arrayToString(c1);
+		String s2 = arrayToString(c2);
+		for(Execution e : abstractExecuters) {
+			if(e.match(s1,s2)) {
+				e.exec();
 			}
 		}
+	}
+	
+	public static String arrayToString(byte[] code) {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0;i < code.length;i++) {
+			sb.append(code[7 - i]);
+		}
+		return sb.toString();
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 
 }
