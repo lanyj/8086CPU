@@ -6,8 +6,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-import cn.jay.computer.utilexception.CopyArrayException;
-import registercfg.Configer;  
+import cfg.Configer;
+import cn.jay.computer.utilexception.CopyArrayException;  
   
 public class Server {
 	ArrayList<ServerThread> serverThreads = new ArrayList<ServerThread>();

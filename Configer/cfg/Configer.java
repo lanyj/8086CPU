@@ -1,12 +1,13 @@
-package registercfg;
+package cfg;
 
 import java.util.HashMap;
 
 import cn.jay.computer.clk.CLK;
+import cn.jay.computer.memory.MemoryManager;
 
 public class Configer {
-	public static final long BASE_CLK_DELAY = 100;
-	
+	public static final long BASE_CLK_DELAY = 1000;
+	public static final MemoryManager MEMORY_MANAGER = new MemoryManager(10240000);
 	public static final HashMap<Integer, CLK> CLK_POOL = new HashMap<>();
 	
 	/**
@@ -23,6 +24,10 @@ public class Configer {
 			CLK_POOL.put(mills, new CLK(mills));
 		}
 		return CLK_POOL.get(mills);
+	}
+	
+	public static final MemoryManager getMeomryManager() {
+		return MEMORY_MANAGER;
 	}
 	
 	public static final int getRegisterSize() {

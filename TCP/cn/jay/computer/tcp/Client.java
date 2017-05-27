@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import registercfg.Configer;
+import cfg.Configer;
 
 public abstract class Client extends Thread {
 	protected Socket socket = null;

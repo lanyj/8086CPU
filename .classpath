@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Launcher"/>
 	<classpathentry kind="src" path="ALU"/>
 	<classpathentry kind="src" path="MEMORY"/>
 	<classpathentry kind="src" path="EXECUTE"/>

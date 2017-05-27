@@ -1,4 +1,9 @@
 <excutecode>
+	<segmentoverride>
+		<category name="SegmentChanger">
+			<subcategory opcode="001**110" operand="(SEG)">segment override</subcategory>
+		</category>
+	</segmentoverride>
 	<datatransferoperation>
 		<category name="MOV">
 			<subcategory opcode="100010**" operand="(D)(W)(MOD)(REG)(R/M)">MOV reg/mem to/from reg</subcategory>
@@ -54,4 +59,79 @@
 			<subcategory opcode="10011101" operand="">pop flags</subcategory>
 		</category>
 	</datatransferoperation>
+	<arithmeticoperation>
+		<category name="ADD">
+			<subcategory opcode="000000**********" operand="(D)(W)(MOD)(REG)(R/M)">add reg/mem with reg to either</subcategory>
+			<subcategory opcode="100000****000***" operand="(D)(W)(MOD)(R/M)">add imme to reg/mem</subcategory>
+			<subcategory opcode="0000010*" operand="(W)">add imme to acc</subcategory>
+		</category>
+		<category name="ADC">
+			<subcategory opcode="000100**********" operand="(D)(W)(MOD)(REG)(R/M)">add reg/mem with reg to either</subcategory>
+			<subcategory opcode="100000****010***" operand="(D)(W)(MOD)(R/M)">add imme to reg/mem</subcategory>
+			<subcategory opcode="0001010*" operand="(W)">add imme to acc</subcategory>
+		</category>
+		<category name="INC">
+			<subcategory opcode="1111111***000***" operand="(W)(MOD)(R/M)">inc reg/mem</subcategory>
+			<subcategory opcode="01000***" operand="(REG)">inc reg</subcategory>
+		</category>
+		<category name="AAA">
+			<subcategory opcode="00110111" operand="">ascii adjust for add</subcategory>
+		</category>
+		<category name="DAA">
+			<subcategory opcode="00100111" operand="">decimal adjust for add</subcategory>
+		</category>
+		<category name="SUB">
+			<subcategory opcode="001010**********" operand="(D)(W)(MOD)(REG)(R/M)">sub reg/mem with reg from either</subcategory>
+			<subcategory opcode="100000****101***" operand="(D)(W)(MOD)(R/M)">sub imme from reg/mem</subcategory>
+			<subcategory opcode="0010110*" operand="(W)">sub imme from acc</subcategory>
+		</category>
+		<category name="SBB">
+			<subcategory opcode="000110**********" operand="(D)(W)(MOD)(REG)(R/M)">sub reg/mem with reg from either</subcategory>
+			<subcategory opcode="100000****011***" operand="(D)(W)(MOD)(R/M)">sub imme from reg/mem</subcategory>
+			<subcategory opcode="0001110*" operand="(W)">sub imme from acc</subcategory>
+		</category>
+		<category name="INC">
+			<subcategory opcode="1111111***001***" operand="(W)(MOD)(R/M)">dec reg/mem</subcategory>
+			<subcategory opcode="01001***" operand="(REG)">dec reg</subcategory>
+		</category>
+		<category name="NEG">
+			<subcategory opcode="1111011***011***" operand="(W)(MOD)(R/M)">change sign</subcategory>
+		</category>
+		<category name="SUB">
+			<subcategory opcode="001110**********" operand="(D)(W)(MOD)(REG)(R/M)">cmp reg/mem with reg</subcategory>
+			<subcategory opcode="100000****111***" operand="(D)(W)(MOD)(R/M)">cmp imme with reg/mem</subcategory>
+			<subcategory opcode="0011110*" operand="(W)">cmp imme with acc</subcategory>
+		</category>
+		<category name="AAS">
+			<subcategory opcode="00111111" operand="">ascii adjust for sub</subcategory>
+		</category>
+		<category name="DAS">
+			<subcategory opcode="00101111" operand="">decimal adjust for sub</subcategory>
+		</category>
+		<category name="MUL">
+			<subcategory opcode="1111011***100***" operand="(W)(MOD)(R/M)">multiply,unsigned</subcategory>
+		</category>
+		<category name="IMUL">
+			<subcategory opcode="1111011***101***" operand="(W)(MOD)(R/M)">multiply,signed</subcategory>
+		</category>
+		<category name="AAM">
+			<subcategory opcode="1101010000001010" operand="">ascii adjust for mul</subcategory>
+		</category>
+		<category name="DIV">
+			<subcategory opcode="1111011***110***" operand="(W)(MOD)(R/M)">divide,unsigned</subcategory>
+		</category>
+		<category name="IDIV">
+			<subcategory opcode="1111011***111***" operand="(W)(MOD)(R/M)">divide,signed</subcategory>
+		</category>
+		<category name="AAD">
+			<subcategory opcode="1101010100001010" operand="">ascii adjust for div</subcategory>
+		</category>
+		<category name="CBW">
+			<subcategory opcode="10011000" operand="">convert byte to word</subcategory>
+		</category>
+		<category name="CWD">
+			<subcategory opcode="10011001" operand="">convert word to double word</subcategory>
+		</category>
+	</arithmeticoperation>
+		
 </excutecode>

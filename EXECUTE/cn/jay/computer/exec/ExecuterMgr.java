@@ -26,23 +26,44 @@ public class ExecuterMgr implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		Elements es = document.getElementsByTag("datatransferoperation");
-		Elements cs = es.get(0).children();
-		for(int i = 0;i < cs.size();i++) {
-			String name = cs.get(i).attr("name");
-			Elements ss = cs.get(i).children();
-			for(int j = 0;j < ss.size();j++) {
-				Execution ec = null;
-				try {
-					ec = (Execution) Class.forName("cn.jay.computer.exec.datatransferoperation." + name).getConstructors()[0].newInstance(ss.get(j).attr("opcode"), ss.get(j).attr("operand"), ss.get(j).text(), j);
-				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-						| InvocationTargetException | SecurityException | ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		{
+			Elements es = document.getElementsByTag("segmentoverride");
+			Elements cs = es.get(0).children();
+			for(int i = 0;i < cs.size();i++) {
+				String name = cs.get(i).attr("name");
+				Elements ss = cs.get(i).children();
+				for(int j = 0;j < ss.size();j++) {
+					Execution ec = null;
+					try {
+						ec = (Execution) Class.forName("cn.jay.computer.exec.segmentoverride." + name).getConstructors()[0].newInstance(ss.get(j).attr("opcode"), ss.get(j).attr("operand"), ss.get(j).text(), j);
+					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException | SecurityException | ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(ec != null)
+						addExecuter(name, ec);
 				}
-				if(ec != null)
-					addExecuter(name, ec);
+			}
+		}
+		{
+			Elements es = document.getElementsByTag("datatransferoperation");
+			Elements cs = es.get(0).children();
+			for(int i = 0;i < cs.size();i++) {
+				String name = cs.get(i).attr("name");
+				Elements ss = cs.get(i).children();
+				for(int j = 0;j < ss.size();j++) {
+					Execution ec = null;
+					try {
+						ec = (Execution) Class.forName("cn.jay.computer.exec.datatransferoperation." + name).getConstructors()[0].newInstance(ss.get(j).attr("opcode"), ss.get(j).attr("operand"), ss.get(j).text(), j);
+					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException | SecurityException | ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(ec != null)
+						addExecuter(name, ec);
+				}
 			}
 		}
 	}
@@ -83,6 +104,7 @@ public class ExecuterMgr implements Serializable {
 		String s2 = arrayToString(c2);
 		for(Execution e : abstractExecuters) {
 			if(e.match(s1,s2)) {
+				System.out.println(e);
 				e.exec();
 			}
 		}

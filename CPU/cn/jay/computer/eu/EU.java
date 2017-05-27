@@ -13,6 +13,7 @@ class EU_JOB extends Job {
 
 	@Override
 	public void doJob() {
+		System.out.println("Load next");
 		byte[] ins = BIU.getInstruction();
 		ExecuterMgr.exec(ins, BIU.peekInstruction());
 	}

@@ -2,9 +2,9 @@ package cn.jay.computer.register.baseregister;
 
 import java.util.Arrays;
 
+import cfg.Configer;
 import cn.jay.computer.arrayutils.Utils;
 import cn.jay.computer.utilexception.CopyArrayException;
-import registercfg.Configer;
 
 public abstract class BaseRegister {
 	private final byte[] DATA = new byte[Configer.getRegisterSize()];

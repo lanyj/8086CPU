@@ -1,7 +1,7 @@
 package cn.jay.computer.register.ipregister;
 
+import cfg.Configer;
 import cn.jay.computer.utilexception.CopyArrayException;
-import registercfg.Configer;
 
 public class IP {
 	public static long IP = 0;

@@ -2,6 +2,7 @@ package cn.jay.computer.memory;
 
 import java.util.Arrays;
 
+import cfg.Configer;
 import cn.jay.computer.alu.MathUtils;
 
 public class Memoryer {
@@ -15,49 +16,42 @@ public class Memoryer {
 	 * 8ED8 -> MOV DS,AX
 	 */
 
-	// private static final byte[][] test_code = { { 0, 1, 0, 1, 0, 0, 0, 1 }, {
-	// 1, 1, 1, 1, 0, 0, 0, 1 }, { 1, 1, 1, 1, 0, 0, 0, 1 },
-	// { 0, 0, 1, 0, 1, 1, 0, 0 }, { 0, 1, 0, 0, 1, 0, 0, 0 }, { 1, 1, 1, 1, 1,
-	// 1, 1, 1 } };
-	
-	//MOV [BX], 123FH
-//	private static final byte[][] test_code = { { 1, 1, 1, 0, 0, 0, 1, 1 }, { 1, 1, 1, 0, 0, 0, 0, 0 },
-//			{ 1, 1, 1, 0, 0, 0, 0, 0 }, { 1, 1, 1, 1, 1, 1, 0, 0 }, { 0, 1, 0, 0, 1, 0, 0, 0 },
-//			{ 1, 1, 1, 1, 1, 1, 1, 1 } };
-	
-	//MOV BX, 123FH
-//	private static final byte[][] test_code = { { 1, 1, 0, 1, 1, 1, 0, 1 }, { 1, 1, 0, 1, 1, 1, 0, 1 },
-//				{ 1, 1, 0, 1, 1, 1, 0, 1 }, { 0, 1, 0, 0, 1, 0, 0, 0 },
-//				{ 1, 1, 1, 1, 1, 1, 1, 1 } };
-	// private static final byte[][] test_code =
-	// {{1,0,0,0,1,0,1,1},{0,1,0,0,0,1,1,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{1,1,1,1,1,1,1,1}
-	// };
-	
-	
-//	PUSH DS
-	private static final byte[][] test_code = { { 1, 1, 1, 1, 1, 1, 1, 1 },{ 0,0,0,0,1,1,0,1 }, { 0,0,0,0,1,1,0,1},{1,1,1,1,1,1,0,0},{0,1,0,0,1,0,0,0},{1,1,1,1,1,1,1,1} };
-	private static int p_i = 0;
-
 	public static final byte[] read(long address, boolean W) {
-		return read(longToByteArray(address, 20), W);
+		if(W) {
+			MemoryManager mm = Configer.getMeomryManager();
+			return arrayConcat(mm.read(address), mm.read(address + 1));
+		} else {
+			return Configer.getMeomryManager().read(address);
+		}
 	}
 
 	public static final boolean write(long address, byte[] value, boolean W) {
-		return write(longToByteArray(address, 20), value, W);
+		MemoryManager mm = Configer.getMeomryManager();
+		if(W) {
+			byte[] low = new byte[8];
+			byte[] high = new byte[8];
+			arraySplit16(low, high, value);
+			if(mm.write(address, low))
+				return mm.write(address + 1, high);
+		} else {
+			return mm.write(address, value);
+		}
+		return false;
 	}
 
 	public static final byte[] read(byte[] address, boolean W) {
 		// TODO
+		byte[] ret = read(byteArrayToLong(address, 20), W);
 		System.out.println("Read memory: addr = " + Arrays.toString(address) + ", W = " + W + ", ret = "
-				+ Arrays.toString(test_code[p_i]));
-		return test_code[p_i++];
+				+ Arrays.toString(ret));
+		return ret;
 	}
 
 	public static final boolean write(byte[] address, byte[] value, boolean W) {
 		// TODO
 		System.out.println("Write memory: addr = " + Arrays.toString(address) + ", W = " + W + ", val = "
 				+ Arrays.toString(value));
-		return false;
+		return write(byteArrayToLong(address, 20), value, W);
 	}
 
 	public static final byte[] read(byte[] index, byte[] base, boolean W) {
@@ -80,6 +74,16 @@ public class Memoryer {
 			b[i] = (byte) ((value >> i) & 1);
 		}
 		return b;
+	}
+	
+	public static long byteArrayToLong(byte[] value,int length) {
+		long p = 0;
+		long t = 0;
+		for(int i = 0;i < length;i++) {
+			t = value[i];
+			p |= t << i;
+		}
+		return p;
 	}
 
 	/**
@@ -104,4 +108,24 @@ public class Memoryer {
 		}
 	}
 
+	public static byte[] arrayConcat(byte[] low,byte[] high) {
+		byte[] ret = new byte[low.length + high.length];
+		for(int i = 0;i < low.length;i++) {
+			ret[i] = low[i];
+		}
+		for(int i = 0;i < high.length;i++) {
+			ret[low.length + i] = high[i];
+		}
+		return ret;
+	}
+	
+	public static void arraySplit16(byte[] low, byte[] high, byte[] src) {
+		for(int i = 0;i < 8;i++) {
+			low[i] = src[i];
+		}
+		for(int i = 0;i < 8;i++) {
+			high[i] = src[i + 8];
+		}
+	}
+	
 }

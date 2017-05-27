@@ -30,6 +30,12 @@ public class CLK extends Thread {
 	
 	public void run() {
 		while(alive) {
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+			}
+			System.out.println("dojob - " + COUNTER.isZero());
+			
 			synchronized (COUNTER) {
 				if(!COUNTER.isZero()) {
 					continue;
@@ -37,10 +43,6 @@ public class CLK extends Thread {
 			}
 			for(TimerTask t : tasks) {
 				new Thread(t).start();
-			}
-			try {
-				Thread.sleep(delay);
-			} catch (InterruptedException e) {
 			}
 		}
 	}

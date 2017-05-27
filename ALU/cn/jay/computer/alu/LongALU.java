@@ -2,10 +2,10 @@ package cn.jay.computer.alu;
 
 import java.util.Arrays;
 
+import cfg.Configer;
 import cn.jay.computer.alu.exception.DivideException;
 import cn.jay.computer.alu.exception.LengthNotMatchException;
 import cn.jay.computer.register.flagregister.FLAGS;
-import registercfg.Configer;
 
 public class LongALU {
 	public static final int SIZE = Configer.getInstructionLength();

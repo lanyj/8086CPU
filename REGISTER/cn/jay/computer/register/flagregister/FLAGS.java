@@ -1,6 +1,6 @@
 package cn.jay.computer.register.flagregister;
 
-import registercfg.Configer;
+import cfg.Configer;
 
 public class FLAGS {
 	public static final int OF = 11;
@@ -25,10 +25,22 @@ public class FLAGS {
 	 */
 	public static final byte[] FLAGS = new byte[Configer.getRegisterSize()];
 	
+	public static byte[] getFLAGS() {
+		return FLAGS.clone();
+	}
+
 	public static boolean getFLAGS(int index) {
 		return FLAGS[index] > 0;
 	}
 
+	public static void setFLAGS(byte[] value) {
+		if(ENABLE) {
+			for(int i = 0;i < value.length;i++) {
+				FLAGS[i] = value[i];
+			}
+		}
+	}
+	
 	public static void setFLAGS(int index,boolean value) {
 		if(ENABLE)
 			FLAGS[index] = (byte) (value ? 1 : 0);

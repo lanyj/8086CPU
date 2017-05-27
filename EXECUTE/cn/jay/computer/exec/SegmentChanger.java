@@ -11,28 +11,34 @@ public class SegmentChanger extends Execution {
 	public SegmentChanger(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
+
 	public void exec(byte code) {
 		int conn = getIndex();
-		
+
 		switch (conn) {
 		case -1: {
 			break;
 		}
 		case 0: {
-			Environment.setDataSegment(ES._ES);
-			break;
-		}
-		case 1: {
-			Environment.setDataSegment(CS._CS);
-			break;
-		}
-		case 2: {
-			Environment.setDataSegment(SS._SS);
-			break;
-		}
-		case 3: {
-			Environment.setDataSegment(DS._DS);
-			break;
+			String SEG = getOperand("SEG");
+			switch (SEG) {
+			case "00": {
+				Environment.setDataSegment(ES._ES);
+				break;
+			}
+			case "01": {
+				Environment.setDataSegment(CS._CS);
+				break;
+			}
+			case "10": {
+				Environment.setDataSegment(SS._SS);
+				break;
+			}
+			case "11": {
+				Environment.setDataSegment(DS._DS);
+				break;
+			}
+			}
 		}
 		}
 	}
