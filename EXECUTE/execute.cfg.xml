@@ -197,7 +197,8 @@
 			<subcategory opcode="1010110*" operand="(W)">load byte/word to AL/AX</subcategory>
 		</category>
 		<category name="STOS">
-			<subcategory opcode="1010101*" operand="(W)">stor byte/word from AL/AX</subcategory>
+			<subcategory opcode="1010101*" operand="(W)">store byte/word from AL/AX</subcategory>
 		</category>
 	</stringmanipulationoperation>
+	
 </excutecode>

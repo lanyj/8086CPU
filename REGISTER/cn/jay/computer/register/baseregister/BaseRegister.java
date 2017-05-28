@@ -59,4 +59,9 @@ public abstract class BaseRegister {
 		return DATA[index];
 	}
 	
+	@Override
+	public String toString() {
+		return Arrays.toString(DATA);
+	}
+	
 }
