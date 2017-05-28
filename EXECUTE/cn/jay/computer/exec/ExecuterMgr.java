@@ -66,6 +66,26 @@ public class ExecuterMgr implements Serializable {
 				}
 			}
 		}
+		{
+			Elements es = document.getElementsByTag("arithmeticoperation");
+			Elements cs = es.get(0).children();
+			for(int i = 0;i < cs.size();i++) {
+				String name = cs.get(i).attr("name");
+				Elements ss = cs.get(i).children();
+				for(int j = 0;j < ss.size();j++) {
+					Execution ec = null;
+					try {
+						ec = (Execution) Class.forName("cn.jay.computer.exec.arithmeticoperation." + name).getConstructors()[0].newInstance(ss.get(j).attr("opcode"), ss.get(j).attr("operand"), ss.get(j).text(), j);
+					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException | SecurityException | ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if(ec != null)
+						addExecuter(name, ec);
+				}
+			}
+		}
 	}
 	
 	public static Elements getElements(String name) {

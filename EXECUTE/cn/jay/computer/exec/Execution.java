@@ -139,5 +139,12 @@ public class Execution {
 		}
 		return ret;
 	}
-
+	public static void arraySplit(byte[] high,byte[] low,byte[] src) {
+		for(int i = 0;i < low.length;i++) {
+			low[i] = src[i];
+		}
+		for(int i = 0;i < high.length;i++) {
+			high[i] = src[i + low.length];
+		}
+	}
 }

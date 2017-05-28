@@ -4,6 +4,7 @@ import cn.jay.computer.alu.MathUtils;
 import cn.jay.computer.eu.Environment;
 import cn.jay.computer.exec.Execution;
 import cn.jay.computer.memory.Memoryer;
+import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.dataregister.BX;
 import cn.jay.computer.utilexception.CopyArrayException;
@@ -21,10 +22,12 @@ public class XLAT extends Execution {
 			break;
 		}
 		case 0:{
+			BaseRegister env = Environment.getDataSegment();
+
 			byte[] addr = BX.getBX();
 			addr = add16(addr, AX.getAL());
 			try {
-				AX.setAL(Memoryer.read(addr, Environment.getDataSegment().getDATA(), false));
+				AX.setAL(Memoryer.read(addr, env.getDATA(), false));
 			} catch (CopyArrayException e) {
 			}
 			break;

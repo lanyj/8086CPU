@@ -1,6 +1,7 @@
-package cn.jay.computer.exec;
+package cn.jay.computer.exec.segmentoverride;
 
 import cn.jay.computer.eu.Environment;
+import cn.jay.computer.exec.Execution;
 import cn.jay.computer.register.segmentregister.CS;
 import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.register.segmentregister.ES;

@@ -90,7 +90,7 @@
 			<subcategory opcode="100000****011***" operand="(D)(W)(MOD)(R/M)">sub imme from reg/mem</subcategory>
 			<subcategory opcode="0001110*" operand="(W)">sub imme from acc</subcategory>
 		</category>
-		<category name="INC">
+		<category name="DEC">
 			<subcategory opcode="1111111***001***" operand="(W)(MOD)(R/M)">dec reg/mem</subcategory>
 			<subcategory opcode="01001***" operand="(REG)">dec reg</subcategory>
 		</category>
@@ -133,5 +133,71 @@
 			<subcategory opcode="10011001" operand="">convert word to double word</subcategory>
 		</category>
 	</arithmeticoperation>
+	<logicaloperation>
+		<category name="NOT">
+			<subcategory opcode="1111011***010***" operand="(W)(MOD)(R/M)">invert</subcategory>
+		</category>
+		<category name="SHL">
+			<subcategory opcode="110100****100***" operand="(D)(W)(MOD)(R/M)">shift logical/arithmetic left</subcategory>
+		</category>
+		<category name="SHR">
+			<subcategory opcode="110100****101***" operand="(D)(W)(MOD)(R/M)">shift logical right</subcategory>
+		</category>
+		<category name="SAR">
+			<subcategory opcode="110100****111***" operand="(D)(W)(MOD)(R/M)">shift arithmetic right</subcategory>
+		</category>
+		<category name="ROL">
+			<subcategory opcode="110100****000***" operand="(D)(W)(MOD)(R/M)">rotate left</subcategory>
+		</category>
+		<category name="ROR">
+			<subcategory opcode="110100****001***" operand="(D)(W)(MOD)(R/M)">rotate right</subcategory>
+		</category>
+		<category name="RCL">
+			<subcategory opcode="110100****010***" operand="(D)(W)(MOD)(R/M)">rotate through carry left</subcategory>
+		</category>
+		<category name="RCR">
+			<subcategory opcode="110100****011***" operand="(D)(W)(MOD)(R/M)">rotate through carry right</subcategory>
+		</category>
 		
+		<category name="AND">
+			<subcategory opcode="001000**********" operand="(D)(W)(MOD)(R/M)">and reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***100***" operand="(W)(MOD)(R/M)">and imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0010010*" operand="(W)">and imme with acc</subcategory>
+		</category>
+		<category name="TEST">
+			<subcategory opcode="1000010*********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1111011***000***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="1010100*" operand="(W)">imme with acc</subcategory>
+		</category>
+		<category name="OR">
+			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***001***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0000110*" operand="(W)">imme with acc</subcategory>
+		</category>
+		<category name="XOR">
+			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***110***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0011010*" operand="(W)">imme with acc</subcategory>
+		</category>
+	</logicaloperation>
+	<stringmanipulationoperation>
+		<category name="REP">
+			<subcategory opcode="1111001*" operand="(D)">repeat</subcategory>
+		</category>
+		<category name="MOVS">
+			<subcategory opcode="1010010*" operand="(W)">move byte/word</subcategory>
+		</category>
+		<category name="CMPS">
+			<subcategory opcode="1010011*" operand="(W)">compare byte/word</subcategory>
+		</category>
+		<category name="SCAS">
+			<subcategory opcode="1010111*" operand="(W)">scan byte/word</subcategory>
+		</category>
+		<category name="LODS">
+			<subcategory opcode="1010110*" operand="(W)">load byte/word to AL/AX</subcategory>
+		</category>
+		<category name="STOS">
+			<subcategory opcode="1010101*" operand="(W)">stor byte/word from AL/AX</subcategory>
+		</category>
+	</stringmanipulationoperation>
 </excutecode>

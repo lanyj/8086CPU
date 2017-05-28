@@ -1,4 +1,4 @@
-package cn.jay.computer.exec.datatransferoperation;
+package cn.jay.computer.exec;
 
 import cn.jay.computer.alu.MathUtils;
 import cn.jay.computer.biu.BIU;

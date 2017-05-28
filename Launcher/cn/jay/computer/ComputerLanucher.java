@@ -22,8 +22,50 @@ public class ComputerLanucher {
 			itr.next().getValue().open();
 		}
 	}
-
+	
+	public static final byte[][] MAP = {{0,0,0,0},
+										{1,0,0,0},
+										{0,1,0,0},
+										{1,1,0,0},
+										{0,0,1,0},
+										{1,0,1,0},
+										{0,1,1,0},
+										{1,1,1,0},
+										{0,0,0,1},
+										{1,0,0,1},
+										{0,1,0,1},
+										{1,1,0,1},
+										{0,0,1,1},
+										{1,0,1,1},
+										{0,1,1,1},
+										{1,1,1,1}};
+	
+	public static final byte[] getArray(char c) {
+		if(c >= '0' && c <= '9') {
+			return MAP[c - '0'];
+		} else if(c >= 'A' && c <= 'F') {
+			return MAP[c - 'A' + 10];
+		} else if(c >= 'a' && c <= 'f') {
+			return MAP[c - 'a' + 10];
+		}
+		return null;
+	}
+	
+	public static byte[] arrayConcat(byte[] low,byte[] high) {
+		byte[] ret = new byte[low.length + high.length];
+		for(int i = 0;i < low.length;i++) {
+			ret[i] = low[i];
+		}
+		for(int i = 0;i < high.length;i++) {
+			ret[low.length + i] = high[i];
+		}
+		return ret;
+	}
+	
 	public static void main(String[] args) {
+		
+		String mem = "B8FA0A8ED8B82100BB2A00";
+		
 //		PUSH DS
 //		byte[][] test_code = { { 1, 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 0, 0, 1, 1, 0, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0 },
 //				{ 0, 1, 0, 0, 1, 0, 0, 0 }, { 1, 1, 1, 1, 1, 1, 1, 1 } };
@@ -48,8 +90,16 @@ public class ComputerLanucher {
 		} catch (CopyArrayException e) {
 		}
 		MemoryManager mm = Configer.getMeomryManager();
-		for (int i = 0; i < test_code.length; i++) {
-			mm.write(i, test_code[i]);
+//		for (int i = 0; i < 10000 * test_code.length; i++) {
+//			mm.write(i, test_code[i % test_code.length]);
+//		}
+		
+		for(int i = 0;i < mem.length();i++) {
+			char a = mem.charAt(i++);
+			char b = mem.charAt(i);
+			byte[] low = getArray(b);
+			byte[] high = getArray(a);
+			mm.write(i >>> 1, arrayConcat(low, high));
 		}
 		
 		start();

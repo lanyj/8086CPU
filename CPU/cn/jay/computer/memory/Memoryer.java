@@ -1,7 +1,5 @@
 package cn.jay.computer.memory;
 
-import java.util.Arrays;
-
 import cfg.Configer;
 import cn.jay.computer.alu.MathUtils;
 
@@ -42,15 +40,15 @@ public class Memoryer {
 	public static final byte[] read(byte[] address, boolean W) {
 		// TODO
 		byte[] ret = read(byteArrayToLong(address, 20), W);
-		System.out.println("Read memory: addr = " + Arrays.toString(address) + ", W = " + W + ", ret = "
-				+ Arrays.toString(ret));
+//		System.out.println("Read memory: addr = " + Arrays.toString(address) + ", W = " + W + ", ret = "
+//				+ Arrays.toString(ret));
 		return ret;
 	}
 
 	public static final boolean write(byte[] address, byte[] value, boolean W) {
 		// TODO
-		System.out.println("Write memory: addr = " + Arrays.toString(address) + ", W = " + W + ", val = "
-				+ Arrays.toString(value));
+//		System.out.println("Write memory: addr = " + Arrays.toString(address) + ", W = " + W + ", val = "
+//				+ Arrays.toString(value));
 		return write(byteArrayToLong(address, 20), value, W);
 	}
 

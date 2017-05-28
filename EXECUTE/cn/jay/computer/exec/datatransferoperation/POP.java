@@ -3,7 +3,9 @@ package cn.jay.computer.exec.datatransferoperation;
 import cn.jay.computer.biu.BIU;
 import cn.jay.computer.eu.Environment;
 import cn.jay.computer.exec.Execution;
+import cn.jay.computer.exec.RM_MOD_Analyzer;
 import cn.jay.computer.memory.Memoryer;
+import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.baseregister.RegisterMgr;
 import cn.jay.computer.register.indexregister.SP;
 import cn.jay.computer.register.segmentregister.SS;
@@ -21,6 +23,7 @@ public class POP extends Execution {
 			break;
 		}
 		case 0:{
+			BaseRegister env = Environment.getDataSegment();
 			BIU.getInstruction();
 			
 			String MOD = getOperand("MOD");
@@ -34,7 +37,7 @@ public class POP extends Execution {
 				} catch (Exception e) {
 				}
 			} else {
-				Memoryer.write(addr, Environment.getDataSegment().getDATA(), Memoryer.read(SP.getSP(), SS.getSS(), true), true);
+				Memoryer.write(addr, env.getDATA(), Memoryer.read(SP.getSP(), SS.getSS(), true), true);
 			}
 			
 			SP.add2();
