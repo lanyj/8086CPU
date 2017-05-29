@@ -16,12 +16,14 @@ public class MemoryManager extends Client implements IOInterface {
 	
 	
 	public void test() throws Exception {
-		InputStream is = new FileInputStream(new File(System.getProperty("user.dir") + "/COMPUT.EXE"));
+		InputStream is = new FileInputStream(new File(System.getProperty("user.dir") + "/Dos6.22-5.25.img"));
 		int b = is.read();
-		for(int i = 0;b != -1;i++) {
+		int i = 0;
+		for(;b != -1;i++) {
 			memory.write(i, (byte) b);
 			b = is.read();
 		}
+		System.out.println(i);
 		is.close();
 	}
 	

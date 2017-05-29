@@ -46,7 +46,7 @@ public abstract class BaseRegister {
 	public final byte[] getHIGH() {
 		int size = DATA.length / 2;
 		byte[] b = new byte[size];
-		for (int i = DATA.length - 1; i >= 0; i--) {
+		for (int i = DATA.length - 1; i >= DATA.length / 2; i--) {
 			b[i - size] = DATA[i];
 		}
 		return b;

@@ -6,8 +6,8 @@ import cn.jay.computer.clk.CLK;
 import cn.jay.computer.memory.MemoryManager;
 
 public class Configer {
-	public static final long BASE_CLK_DELAY = 1000;
-	public static final MemoryManager MEMORY_MANAGER = new MemoryManager(10240000);
+	public static final long BASE_CLK_DELAY = 100;
+	public static final MemoryManager MEMORY_MANAGER = new MemoryManager(0xfffffff);
 	public static final HashMap<Integer, CLK> CLK_POOL = new HashMap<>();
 	
 	/**

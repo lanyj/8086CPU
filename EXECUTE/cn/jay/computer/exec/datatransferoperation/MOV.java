@@ -109,7 +109,7 @@ public class MOV extends Execution {
 				byte[] high = BIU.getInstruction();
 				addr = arrayConcat(low, high);
 			} else {
-				addr = low;
+				addr = arrayConcat(low, new byte[8]);
 			}
 
 			if (D) {

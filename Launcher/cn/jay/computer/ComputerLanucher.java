@@ -10,7 +10,6 @@ import cn.jay.computer.eu.EU;
 import cn.jay.computer.memory.MemoryManager;
 import cn.jay.computer.register.ipregister.IP;
 import cn.jay.computer.register.segmentregister.CS;
-import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.utilexception.CopyArrayException;
 
 public class ComputerLanucher {
@@ -102,9 +101,10 @@ public class ComputerLanucher {
 //			mm.write(i >>> 1, arrayConcat(low, high));
 //		}
 		try {
-			DS.setDS(new byte[]{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0});
-			CS.setCS(new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
-			IP.setIP(new byte[]{0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0});
+//			DS.setDS(new byte[]{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0});
+//			CS.setCS(new byte[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1});
+			CS.setCS(new byte[16]);
+			IP.setIP(new byte[16]);
 		} catch (CopyArrayException e) {
 		}
 		mm.test();

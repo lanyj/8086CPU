@@ -23,7 +23,7 @@
 			<subcategory opcode="000**111" operand="(SEG)">pop seg</subcategory>
 		</category>
 		<category name="XCHG">
-			<subcategory opcode="1000011*" operand="(W)(MODE)(REG)(R/M)">exchange reg/mem with reg</subcategory>
+			<subcategory opcode="1000011*" operand="(W)(MOD)(REG)(R/M)">exchange reg/mem with reg</subcategory>
 			<subcategory opcode="10010***" operand="(REG)">exchange reg with acc</subcategory>
 		</category>
 		<category name="IN">

@@ -120,7 +120,7 @@ public class Execution {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(opcode + " + " + operand + " -> " + describle + "\n");
+		sb.append(opcode + " + " + operand + " -> " + describle);
 
 		sb.append(Arrays.toString(operandName.toArray(new String[]{})) + "\n");
 		sb.append(Arrays.toString(operandValue.toArray(new String[]{})));

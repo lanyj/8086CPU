@@ -52,6 +52,7 @@ public class ADD extends Execution {
 					LongALU.add8(a1, a2);
 				}
 			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
 
 			if (D) {

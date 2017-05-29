@@ -33,22 +33,14 @@ public class CALL extends Execution {
 		case 0: {
 			PUSH.push(IP.getIP());
 			
-			boolean W = getOperand("W").equals("0");
-			if(W) {
-				byte[] low = BIU.getInstruction();
-				byte[] high = BIU.getInstruction();
-				
-				byte[] ip = arrayConcat(low, high);
-				
-				long disp = byteArrayToLong(ip, true, 16);
-				
-				IP.setIP(IP.getIPLongValue() + disp);
-			} else {
-				byte[] ip = BIU.getInstruction();
-				
-				long disp = byteArrayToLong(ip, true, 8);
-				IP.setIP(IP.getIPLongValue() + disp);
-			}
+			byte[] low = BIU.getInstruction();
+			byte[] high = BIU.getInstruction();
+			
+			byte[] ip = arrayConcat(low, high);
+			
+			long disp = byteArrayToLong(ip, true, 16);
+			
+			IP.setIP(IP.getIPLongValue() + disp);
 			break;
 		}
 		case 1: {

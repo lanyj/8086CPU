@@ -78,8 +78,6 @@ public class OR extends Execution {
 
 			BIU.getInstruction();
 
-			@SuppressWarnings("unused")
-			boolean S = getOperand("D").equals("1");
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
