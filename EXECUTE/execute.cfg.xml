@@ -200,5 +200,81 @@
 			<subcategory opcode="1010101*" operand="(W)">store byte/word from AL/AX</subcategory>
 		</category>
 	</stringmanipulationoperation>
-	
+	<controltransferoperation>
+		<category name="CALL">
+			<subcategory opcode="11101000" operand="">direct within segment</subcategory>
+			<subcategory opcode="11111111**010***" operand="(MOD)(R/M)">indirect within segment</subcategory>
+			<subcategory opcode="10011010" operand="">direct intersegment</subcategory>
+			<subcategory opcode="11111111**011***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+		</category>
+		<category name="JMP">
+			<subcategory opcode="111010*1" operand="(W)">direct within segment</subcategory>
+			<subcategory opcode="11111111**100***" operand="(MOD)(R/M)">indirect within segment</subcategory>
+			<subcategory opcode="11101010" operand="">direct intersegment</subcategory>
+			<subcategory opcode="11111111**101***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+		</category>
+		<category name="RET">
+			<subcategory opcode="1100001*" operand="(W)">within segment (adding imme to SP)</subcategory>
+			<subcategory opcode="1100101*" operand="(W)">intersegment (adding imme to SP)</subcategory>
+		</category>
+		<category name="JMP_ALL">
+			<subcategory opcode="0111****" operand="(D)(MOD)">jump with con</subcategory>
+		</category>
+		<category name="LOOP">
+			<subcategory opcode="11100010" operand="">loop cx times</subcategory>
+		</category>
+		<category name="LOOPZ">
+			<subcategory opcode="11100001" operand="">loop while zero/equal</subcategory>
+		</category>
+		<category name="LOOPNZ">
+			<subcategory opcode="11100000" operand="">loop while not zero/equal</subcategory>
+		</category>
+		<category name="JCXZ">
+			<subcategory opcode="11100011" operand="">jump on cx zero</subcategory>
+		</category>
+		<category name="INT">
+			<subcategory opcode="1100110*" operand="(W)">int type</subcategory>
+		</category>
+		<category name="INTO">
+			<subcategory opcode="11001110" operand="">interrupt on overflow</subcategory>
+		</category>
+		<category name="IRET">
+			<subcategory opcode="11001111" operand="">interrupt return</subcategory>
+		</category>
+	</controltransferoperation>
+	<processorcontroloperation>
+		<category name="CLC">
+			<subcategory opcode="11111000" operand="">clear carry</subcategory>
+		</category>
+		<category name="CMC">
+			<subcategory opcode="11110101" operand="">complement carry</subcategory>
+		</category>
+		<category name="STC">
+			<subcategory opcode="11111001" operand="">set carry</subcategory>
+		</category>
+		<category name="CLD">
+			<subcategory opcode="11111100" operand="">clear direction</subcategory>
+		</category>
+		<category name="STD">
+			<subcategory opcode="11111101" operand="">set direction</subcategory>
+		</category>
+		<category name="CLI">
+			<subcategory opcode="11111010" operand="">clear interrupt</subcategory>
+		</category>
+		<category name="STI">
+			<subcategory opcode="11111011" operand="">set interrupt</subcategory>
+		</category>
+		<category name="HLT">
+			<subcategory opcode="11110100" operand="">halt</subcategory>
+		</category>
+		<category name="WAIT">
+			<subcategory opcode="10011011" operand="">wait</subcategory>
+		</category>
+		<category name="ESC">
+			<subcategory opcode="11011********" operand="(REG)(MOD)(D)(SEG)(R/M)">escape(to External device)</subcategory>
+		</category>
+		<category name="LOCK">
+			<subcategory opcode="11110000" operand="">bus lock prefix</subcategory>
+		</category>
+	</processorcontroloperation>
 </excutecode>

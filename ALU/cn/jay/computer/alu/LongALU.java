@@ -10,7 +10,7 @@ import cn.jay.computer.register.flagregister.FLAGS;
 public class LongALU {
 	public static final int SIZE = Configer.getInstructionLength();
 
-	public static void add16(byte[] des, byte[] src) throws Exception {
+	public static void add16(byte[] des, byte[] src) throws LengthNotMatchException  {
 		if (des.length != src.length || des.length != 16) {
 			throw new LengthNotMatchException("add16:" + des.length + ", " + src.length);
 		}

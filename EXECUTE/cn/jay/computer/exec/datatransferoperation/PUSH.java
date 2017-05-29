@@ -16,6 +16,14 @@ public class PUSH extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
+	public static void push(byte[] src) {
+		SP.sub2();
+		try {
+			Memoryer.write(SP.getSP(), SS.getSS(), src, true);
+		} catch (Exception e) {
+		}
+	}
+	
 	public void exec() {
 		int conn = getIndex();
 		switch (conn) {

@@ -16,6 +16,13 @@ public class POP extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
+	public static byte[] pop() {
+		byte[] ret = Memoryer.read(SP.getSP(), SS.getSS(), true);
+		SP.add2();
+
+		return ret;
+	}
+	
 	public void exec() {
 		int conn = getIndex();
 		switch (conn) {

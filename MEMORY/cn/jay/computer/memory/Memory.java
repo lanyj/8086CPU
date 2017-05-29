@@ -38,6 +38,13 @@ public class Memory implements Serializable {
 		return getByte(address);
 	}
 	
+	public void write(long address, byte value) throws Exception {
+		if (size < address) {
+			throw new Exception("Address lager than memory size." + "[" + address + " > " + size + "]");
+		}
+		memory.get((int) (address / Integer.MAX_VALUE))[(int) (address % Integer.MAX_VALUE)] = value;
+	}
+	
 	public void write(long address, byte[] value) throws Exception {
 		if (size < address) {
 			throw new Exception("Address lager than memory size." + "[" + address + " > " + size + "]");

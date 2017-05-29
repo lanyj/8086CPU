@@ -8,9 +8,9 @@ import cfg.Configer;
 import cn.jay.computer.clk.CLK;
 import cn.jay.computer.eu.EU;
 import cn.jay.computer.memory.MemoryManager;
-import cn.jay.computer.register.dataregister.BX;
-import cn.jay.computer.register.indexregister.BP;
-import cn.jay.computer.register.segmentregister.SS;
+import cn.jay.computer.register.ipregister.IP;
+import cn.jay.computer.register.segmentregister.CS;
+import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.utilexception.CopyArrayException;
 
 public class ComputerLanucher {
@@ -62,9 +62,9 @@ public class ComputerLanucher {
 		return ret;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
-		String mem = "B8FA0A8ED8B82100BB2A00";
+//		String mem = "B8FA0A8ED8B82100BB2A00";
 		
 //		PUSH DS
 //		byte[][] test_code = { { 1, 1, 1, 1, 1, 1, 1, 1 }, { 0, 0, 0, 0, 1, 1, 0, 1 }, { 1, 1, 1, 1, 1, 1, 0, 0 },
@@ -80,27 +80,34 @@ public class ComputerLanucher {
 		//C7863F123F12
 		//A - 10(1010),B - 11(1011),C - 12(1100),D - 13(1101),E - 14(1110),F - 15(1111)
 		//11000111,10001010,00111111,00010010,00111111,00010010
-		byte[][] test_code = {{1,1,1,0,0,0,1,1},{0,1,1,0,0,0,0,1},
-				{1,1,1,1,1,1,0,0},{0,1,0,0,1,0,0,0},{1,1,1,1,1,1,0,0},{0,1,0,0,1,0,0,0}};
-		
-		try {
-			BP.setBP(new byte[]{1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0});
-			SS.setSS(new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1});
-			BX.setBL(new byte[]{1,0,1,0,0,0,0,0});
-		} catch (CopyArrayException e) {
-		}
+//		byte[][] test_code = {{1,1,1,0,0,0,1,1},{0,1,1,0,0,0,0,1},
+//				{1,1,1,1,1,1,0,0},{0,1,0,0,1,0,0,0},{1,1,1,1,1,1,0,0},{0,1,0,0,1,0,0,0}};
+//		
+//		try {
+//			BP.setBP(new byte[]{1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0});
+//			SS.setSS(new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1});
+//			BX.setBL(new byte[]{1,0,1,0,0,0,0,0});
+//		} catch (CopyArrayException e) {
+//		}
 		MemoryManager mm = Configer.getMeomryManager();
 //		for (int i = 0; i < 10000 * test_code.length; i++) {
 //			mm.write(i, test_code[i % test_code.length]);
 //		}
 		
-		for(int i = 0;i < mem.length();i++) {
-			char a = mem.charAt(i++);
-			char b = mem.charAt(i);
-			byte[] low = getArray(b);
-			byte[] high = getArray(a);
-			mm.write(i >>> 1, arrayConcat(low, high));
+//		for(int i = 0;i < mem.length();i++) {
+//			char a = mem.charAt(i++);
+//			char b = mem.charAt(i);
+//			byte[] low = getArray(b);
+//			byte[] high = getArray(a);
+//			mm.write(i >>> 1, arrayConcat(low, high));
+//		}
+		try {
+			DS.setDS(new byte[]{0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0});
+			CS.setCS(new byte[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+			IP.setIP(new byte[]{0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0});
+		} catch (CopyArrayException e) {
 		}
+		mm.test();
 		
 		start();
 	}

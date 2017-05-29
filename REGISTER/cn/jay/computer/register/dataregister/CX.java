@@ -5,6 +5,7 @@ import cn.jay.computer.utilexception.CopyArrayException;
 
 public class CX extends BaseRegister {
 	public final static CX _CX = new CX();
+
 	public static final void setCX(byte[] data) throws CopyArrayException {
 		_CX.setDATA(data);
 	}

@@ -1,0 +1,290 @@
+<excutecode>
+	<segmentoverride>
+		<category name="SegmentChanger">
+			<subcategory opcode="001**110" operand="(SEG)">segment override</subcategory>
+		</category>
+	</segmentoverride>
+	<datatransferoperation>
+		<category name="MOV">
+			<subcategory opcode="100010**" operand="(D)(W)(MOD)(REG)(R/M)">MOV reg/mem to/from reg</subcategory>
+			<subcategory opcode="1100011***000***" operand="(W)(MOD)(R/M)">MOV immed to reg/mem</subcategory>
+			<subcategory opcode="1011****" operand="(W)(REG)">MOV immed to reg</subcategory>
+			<subcategory opcode="101000**" operand="(D)(W)">MOV direct mem to/from acc</subcategory>
+			<subcategory opcode="100011*0**0*****" operand="(D)(MOD)(SEG)(R/M)">MOV reg/mem to/from seg</subcategory>
+		</category>
+		<category name="PUSH">
+			<subcategory opcode="11111111**110***" operand="(MOD)(R/M)">push reg/mem</subcategory>
+			<subcategory opcode="01010***" operand="(REG)">push reg</subcategory>
+			<subcategory opcode="000**110" operand="(SEG)">push seg</subcategory>
+		</category>
+		<category name="POP">
+			<subcategory opcode="10001111**000***" operand="(MOD)(R/M)">pop reg/mem</subcategory>
+			<subcategory opcode="01011***" operand="(REG)">pop reg</subcategory>
+			<subcategory opcode="000**111" operand="(SEG)">pop seg</subcategory>
+		</category>
+		<category name="XCHG">
+			<subcategory opcode="1000011*" operand="(W)(MODE)(REG)(R/M)">exchange reg/mem with reg</subcategory>
+			<subcategory opcode="10010***" operand="(REG)">exchange reg with acc</subcategory>
+		</category>
+		<category name="IN">
+			<subcategory opcode="1110010*" operand="(W)">input with fixed port</subcategory>
+			<subcategory opcode="1110110*" operand="(W)">input with variable port</subcategory>
+		</category>
+		<category name="OUT">
+			<subcategory opcode="1110011*" operand="(W)">output with fixed port</subcategory>
+			<subcategory opcode="1110111*" operand="(W)">output with variable port</subcategory>
+		</category>
+		<category name="XLAT">
+			<subcategory opcode="11010111" operand="">translate byte to AL</subcategory>
+		</category>
+		<category name="LEA">
+			<subcategory opcode="10001101" operand="(MOD)(REG)(R/M)">load EA to reg</subcategory>
+		</category>
+		<category name="LDS">
+			<subcategory opcode="11000101" operand="(MOD)(REG)(R/M)">load pointer to DS</subcategory>
+		</category>
+		<category name="LES">
+			<subcategory opcode="11000100" operand="(MOD)(REG)(R/M)">load pointer to ES</subcategory>
+		</category>
+		<category name="LAHF">
+			<subcategory opcode="10011111" operand="">load AH with flags</subcategory>
+		</category>
+		<category name="SAHF">
+			<subcategory opcode="10011110" operand="">store AH into flags</subcategory>
+		</category>
+		<category name="PUSHF">
+			<subcategory opcode="10011100" operand="">push flags</subcategory>
+		</category>
+		<category name="POPF">
+			<subcategory opcode="10011101" operand="">pop flags</subcategory>
+		</category>
+	</datatransferoperation>
+	<arithmeticoperation>
+		<category name="ADD">
+			<subcategory opcode="000000**********" operand="(D)(W)(MOD)(REG)(R/M)">add reg/mem with reg to either</subcategory>
+			<subcategory opcode="100000****000***" operand="(D)(W)(MOD)(R/M)">add imme to reg/mem</subcategory>
+			<subcategory opcode="0000010*" operand="(W)">add imme to acc</subcategory>
+		</category>
+		<category name="ADC">
+			<subcategory opcode="000100**********" operand="(D)(W)(MOD)(REG)(R/M)">add reg/mem with reg to either</subcategory>
+			<subcategory opcode="100000****010***" operand="(D)(W)(MOD)(R/M)">add imme to reg/mem</subcategory>
+			<subcategory opcode="0001010*" operand="(W)">add imme to acc</subcategory>
+		</category>
+		<category name="INC">
+			<subcategory opcode="1111111***000***" operand="(W)(MOD)(R/M)">inc reg/mem</subcategory>
+			<subcategory opcode="01000***" operand="(REG)">inc reg</subcategory>
+		</category>
+		<category name="AAA">
+			<subcategory opcode="00110111" operand="">ascii adjust for add</subcategory>
+		</category>
+		<category name="DAA">
+			<subcategory opcode="00100111" operand="">decimal adjust for add</subcategory>
+		</category>
+		<category name="SUB">
+			<subcategory opcode="001010**********" operand="(D)(W)(MOD)(REG)(R/M)">sub reg/mem with reg from either</subcategory>
+			<subcategory opcode="100000****101***" operand="(D)(W)(MOD)(R/M)">sub imme from reg/mem</subcategory>
+			<subcategory opcode="0010110*" operand="(W)">sub imme from acc</subcategory>
+		</category>
+		<category name="SBB">
+			<subcategory opcode="000110**********" operand="(D)(W)(MOD)(REG)(R/M)">sub reg/mem with reg from either</subcategory>
+			<subcategory opcode="100000****011***" operand="(D)(W)(MOD)(R/M)">sub imme from reg/mem</subcategory>
+			<subcategory opcode="0001110*" operand="(W)">sub imme from acc</subcategory>
+		</category>
+		<category name="DEC">
+			<subcategory opcode="1111111***001***" operand="(W)(MOD)(R/M)">dec reg/mem</subcategory>
+			<subcategory opcode="01001***" operand="(REG)">dec reg</subcategory>
+		</category>
+		<category name="NEG">
+			<subcategory opcode="1111011***011***" operand="(W)(MOD)(R/M)">change sign</subcategory>
+		</category>
+		<category name="SUB">
+			<subcategory opcode="001110**********" operand="(D)(W)(MOD)(REG)(R/M)">cmp reg/mem with reg</subcategory>
+			<subcategory opcode="100000****111***" operand="(D)(W)(MOD)(R/M)">cmp imme with reg/mem</subcategory>
+			<subcategory opcode="0011110*" operand="(W)">cmp imme with acc</subcategory>
+		</category>
+		<category name="AAS">
+			<subcategory opcode="00111111" operand="">ascii adjust for sub</subcategory>
+		</category>
+		<category name="DAS">
+			<subcategory opcode="00101111" operand="">decimal adjust for sub</subcategory>
+		</category>
+		<category name="MUL">
+			<subcategory opcode="1111011***100***" operand="(W)(MOD)(R/M)">multiply,unsigned</subcategory>
+		</category>
+		<category name="IMUL">
+			<subcategory opcode="1111011***101***" operand="(W)(MOD)(R/M)">multiply,signed</subcategory>
+		</category>
+		<category name="AAM">
+			<subcategory opcode="1101010000001010" operand="">ascii adjust for mul</subcategory>
+		</category>
+		<category name="DIV">
+			<subcategory opcode="1111011***110***" operand="(W)(MOD)(R/M)">divide,unsigned</subcategory>
+		</category>
+		<category name="IDIV">
+			<subcategory opcode="1111011***111***" operand="(W)(MOD)(R/M)">divide,signed</subcategory>
+		</category>
+		<category name="AAD">
+			<subcategory opcode="1101010100001010" operand="">ascii adjust for div</subcategory>
+		</category>
+		<category name="CBW">
+			<subcategory opcode="10011000" operand="">convert byte to word</subcategory>
+		</category>
+		<category name="CWD">
+			<subcategory opcode="10011001" operand="">convert word to double word</subcategory>
+		</category>
+	</arithmeticoperation>
+	<logicaloperation>
+		<category name="NOT">
+			<subcategory opcode="1111011***010***" operand="(W)(MOD)(R/M)">invert</subcategory>
+		</category>
+		<category name="SHL">
+			<subcategory opcode="110100****100***" operand="(D)(W)(MOD)(R/M)">shift logical/arithmetic left</subcategory>
+		</category>
+		<category name="SHR">
+			<subcategory opcode="110100****101***" operand="(D)(W)(MOD)(R/M)">shift logical right</subcategory>
+		</category>
+		<category name="SAR">
+			<subcategory opcode="110100****111***" operand="(D)(W)(MOD)(R/M)">shift arithmetic right</subcategory>
+		</category>
+		<category name="ROL">
+			<subcategory opcode="110100****000***" operand="(D)(W)(MOD)(R/M)">rotate left</subcategory>
+		</category>
+		<category name="ROR">
+			<subcategory opcode="110100****001***" operand="(D)(W)(MOD)(R/M)">rotate right</subcategory>
+		</category>
+		<category name="RCL">
+			<subcategory opcode="110100****010***" operand="(D)(W)(MOD)(R/M)">rotate through carry left</subcategory>
+		</category>
+		<category name="RCR">
+			<subcategory opcode="110100****011***" operand="(D)(W)(MOD)(R/M)">rotate through carry right</subcategory>
+		</category>
+		
+		<category name="AND">
+			<subcategory opcode="001000**********" operand="(D)(W)(MOD)(R/M)">and reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***100***" operand="(W)(MOD)(R/M)">and imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0010010*" operand="(W)">and imme with acc</subcategory>
+		</category>
+		<category name="TEST">
+			<subcategory opcode="1000010*********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1111011***000***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="1010100*" operand="(W)">imme with acc</subcategory>
+		</category>
+		<category name="OR">
+			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***001***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0000110*" operand="(W)">imme with acc</subcategory>
+		</category>
+		<category name="XOR">
+			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***110***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0011010*" operand="(W)">imme with acc</subcategory>
+		</category>
+	</logicaloperation>
+	<stringmanipulationoperation>
+		<category name="REP">
+			<subcategory opcode="1111001*" operand="(D)">repeat</subcategory>
+		</category>
+		<category name="MOVS">
+			<subcategory opcode="1010010*" operand="(W)">move byte/word</subcategory>
+		</category>
+		<category name="CMPS">
+			<subcategory opcode="1010011*" operand="(W)">compare byte/word</subcategory>
+		</category>
+		<category name="SCAS">
+			<subcategory opcode="1010111*" operand="(W)">scan byte/word</subcategory>
+		</category>
+		<category name="LODS">
+			<subcategory opcode="1010110*" operand="(W)">load byte/word to AL/AX</subcategory>
+		</category>
+		<category name="STOS">
+			<subcategory opcode="1010101*" operand="(W)">store byte/word from AL/AX</subcategory>
+		</category>
+	</stringmanipulationoperation>
+	<controltransferoperation>
+		<category name="CALL">
+			<subcategory opcode="11101000" operand="">direct within segment</subcategory>
+			<subcategory opcode="11111111**010***" operand="(MOD)(R/M)">indirect within segment</subcategory>
+			<subcategory opcode="10011010" operand="">direct intersegment</subcategory>
+			<subcategory opcode="11111111**011***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+		</category>
+		<category name="JMP">
+			<subcategory opcode="111010*1" operand="(W)">direct within segment</subcategory>
+			<subcategory opcode="11111111**100***" operand="(MOD)(R/M)">indirect within segment</subcategory>
+			<subcategory opcode="11101010" operand="">direct intersegment</subcategory>
+			<subcategory opcode="11111111**101***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+		</category>
+		<category name="RET">
+			<subcategory opcode="1100001*" operand="(W)">within segment (adding imme to SP)</subcategory>
+			<subcategory opcode="1100101*" operand="(W)">intersegment (adding imme to SP)</subcategory>
+		</category>
+		<category name="JE">
+			<subcategory opcode="01110100" operand="">jump on equal/zero</subcategory>
+		</category>
+		<category name="JL">
+			<subcategory opcode="01111100" operand="">jump on less</subcategory>
+		</category>
+		<category name="JLE">
+			<subcategory opcode="01111110" operand="">jump on less or equal/zero</subcategory>
+		</category>
+		<category name="JB">
+			<subcategory opcode="01110010" operand="">jump on below</subcategory>
+		</category>
+		<category name="JBE">
+			<subcategory opcode="01110110" operand="">jump on below or equal/zero</subcategory>
+		</category>
+		<category name="JP">
+			<subcategory opcode="01111010" operand="">jump on parity/parity even</subcategory>
+		</category>
+		<category name="JO">
+			<subcategory opcode="01110000" operand="">jump on overflow</subcategory>
+		</category>
+		<category name="JS">
+			<subcategory opcode="01111000" operand="">jump on sign</subcategory>
+		</category>
+		<category name="JNE">
+			<subcategory opcode="01110101" operand="">jump on not equal/not zero</subcategory>
+		</category>
+		<category name="JNL">
+			<subcategory opcode="01111101" operand="">jump on not less/greater or equal</subcategory>
+		</category>
+		<category name="JNLE">
+			<subcategory opcode="01111111" operand="">jump on not less or equal</subcategory>
+		</category>
+		<category name="JNB">
+			<subcategory opcode="01110011" operand="">jump on not below/above or equal</subcategory>
+		</category>
+		<category name="JNBE">
+			<subcategory opcode="01110111" operand="">jump on not below or equal/above</subcategory>
+		</category>
+		<category name="JNP">
+			<subcategory opcode="01111011" operand="">jump on not par/par odd</subcategory>
+		</category>
+		<category name="JNO">
+			<subcategory opcode="01110001" operand="">jump on not overflow</subcategory>
+		</category>
+		<category name="JNS">
+			<subcategory opcode="01111001" operand="">jump on not sign</subcategory>
+		</category>
+		<category name="LOOP">
+			<subcategory opcode="11100010" operand="">loop cx times</subcategory>
+		</category>
+		<category name="LOOPZ">
+			<subcategory opcode="11100001" operand="">loop while zero/equal</subcategory>
+		</category>
+		<category name="LOOPNZ">
+			<subcategory opcode="11100000" operand="">loop while not zero/equal</subcategory>
+		</category>
+		<category name="JCXZ">
+			<subcategory opcode="11100011" operand="">jump on cx zero</subcategory>
+		</category>
+		<category name="INT">
+			<subcategory opcode="1100110*" operand="(W)">int type</subcategory>
+		</category>
+		<category name="INTO">
+			<subcategory opcode="11001110" operand="">interrupt on overflow</subcategory>
+		</category>
+		<category name="IRET">
+			<subcategory opcode="11001111" operand="">interrupt return</subcategory>
+		</category>
+	</controltransferoperation>
+</excutecode>

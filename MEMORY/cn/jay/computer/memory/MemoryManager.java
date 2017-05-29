@@ -1,5 +1,9 @@
 package cn.jay.computer.memory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 import cn.jay.computer.io_interface.IOInterface;
 import cn.jay.computer.tcp.Client;
 
@@ -8,6 +12,17 @@ public class MemoryManager extends Client implements IOInterface {
 	
 	public MemoryManager(long size) {
 		memory = new Memory(size);
+	}
+	
+	
+	public void test() throws Exception {
+		InputStream is = new FileInputStream(new File(System.getProperty("user.dir") + "/COMPUT.EXE"));
+		int b = is.read();
+		for(int i = 0;b != -1;i++) {
+			memory.write(i, (byte) b);
+			b = is.read();
+		}
+		is.close();
 	}
 	
 	public boolean write(long address, byte[] value) {
@@ -31,5 +46,9 @@ public class MemoryManager extends Client implements IOInterface {
 
 	public void doJob() {
 		//TODO
+	}
+	
+	public static void main(String[] args) throws Exception {
+		new MemoryManager(102400).test();
 	}
 }

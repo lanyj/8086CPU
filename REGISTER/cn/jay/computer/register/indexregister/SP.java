@@ -19,19 +19,19 @@ public class SP extends BaseRegister {
 
 	public static final void sub2() {
 		try {
-			setSP(sub16(getSP(), TWO));
+			setSP(sub(getSP(), TWO));
 		} catch (CopyArrayException e) {
 		}
 	}
 
 	public static final void add2() {
 		try {
-			setSP(add16(getSP(), TWO));
+			setSP(add(getSP(), TWO));
 		} catch (CopyArrayException e) {
 		}
 	}
 
-	public static byte[] add16(byte[] des, byte[] src) {
+	public static byte[] add(byte[] des, byte[] src) {
 		long a = MathUtils.byteArrayToLong(des, false, 16);
 		long b = MathUtils.byteArrayToLong(src, false, 16);
 		byte[] ret = MathUtils.longToByteArray(a + b, false, 16);
@@ -39,7 +39,7 @@ public class SP extends BaseRegister {
 		return ret;
 	}
 	
-	public static byte[] sub16(byte[] des, byte[] src) {
+	public static byte[] sub(byte[] des, byte[] src) {
 		long a = MathUtils.byteArrayToLong(des, false, 16);
 		long b = MathUtils.byteArrayToLong(src, false, 16);
 		byte[] ret = MathUtils.longToByteArray(a - b, false, 16);

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import cn.jay.computer.alu.MathUtils;
+
 //64 bit
 public class Execution {
 	private static final String REGEX = "\\(([A-Z_a-z_0-9_/]*)\\)*";
@@ -146,5 +148,69 @@ public class Execution {
 		for(int i = 0;i < high.length;i++) {
 			high[i] = src[i + low.length];
 		}
+	}
+	
+	public static byte[] longToByteArray(long value, boolean signed, int length) {
+		byte[] b = new byte[64];
+		for(int i = 0;i < length;i++) {
+			b[i] = (byte) ((value >> i) & 1);
+		}
+		if(signed) {
+			for(int i = length;i < 64;i++) {
+				b[i] = b[length - 1];
+			}
+		}
+		return b;
+	}
+
+	public static long byteArrayToLong(byte[] value,boolean signed,int length) {
+		long p = 0;
+		long t = 0;
+		for(int i = 0;i < length;i++) {
+			t = value[i];
+			p |= t << i;
+		}
+		if(signed) {
+			for(int i = length;i < 64;i++) {
+				p |= t << i;
+			}
+		}
+		return p;
+	}
+	
+	public static byte[] add16(byte[] des, byte[] src) {
+		long a = MathUtils.byteArrayToLong(des, false, 16);
+		long b = MathUtils.byteArrayToLong(src, false, 8);
+		byte[] ret = MathUtils.longToByteArray(a + b, false, 16);
+
+		MathUtils.copyArray(des, ret);
+		return ret;
+	}	
+
+	public static byte[] add8(byte[] des, byte[] src) {
+		long a = MathUtils.byteArrayToLong(des, false, 8);
+		long b = MathUtils.byteArrayToLong(src, false, 8);
+		byte[] ret = MathUtils.longToByteArray(a + b, false, 8);
+		
+		MathUtils.copyArray(des, ret);
+		return ret;
+	}
+
+	public static byte[] sub16(byte[] des, byte[] src) {
+		long a = MathUtils.byteArrayToLong(des, false, 16);
+		long b = MathUtils.byteArrayToLong(src, false, 16);
+		byte[] ret = MathUtils.longToByteArray(a - b, false, 16);
+
+		MathUtils.copyArray(des, ret);
+		return ret;
+	}
+
+	public static byte[] sub8(byte[] des, byte[] src) {
+		long a = MathUtils.byteArrayToLong(des, false, 8);
+		long b = MathUtils.byteArrayToLong(src, false, 8);
+		byte[] ret = MathUtils.longToByteArray(a - b, false, 8);
+		
+		MathUtils.copyArray(des, ret);
+		return ret;
 	}
 }

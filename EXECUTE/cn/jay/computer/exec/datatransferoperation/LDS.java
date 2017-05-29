@@ -1,6 +1,5 @@
 package cn.jay.computer.exec.datatransferoperation;
 
-import cn.jay.computer.alu.MathUtils;
 import cn.jay.computer.biu.BIU;
 import cn.jay.computer.eu.Environment;
 import cn.jay.computer.exec.Execution;
@@ -45,12 +44,4 @@ public class LDS extends Execution {
 		}
 		}
 	}
-	
-	public static byte[] add16(byte[] des, byte[] src) {
-		long a = MathUtils.byteArrayToLong(des, false, 16);
-		long b = MathUtils.byteArrayToLong(src, false, 8);
-		byte[] ret = MathUtils.longToByteArray(a + b, false, 16);
-
-		return ret;
-	}	
 }

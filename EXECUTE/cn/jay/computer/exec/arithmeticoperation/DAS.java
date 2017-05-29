@@ -1,6 +1,5 @@
 package cn.jay.computer.exec.arithmeticoperation;
 
-import cn.jay.computer.alu.MathUtils;
 import cn.jay.computer.exec.Execution;
 import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.flagregister.FLAGS;
@@ -64,12 +63,4 @@ public class DAS extends Execution {
 		}
 		}
 	}
-	public static byte[] sub8(byte[] des, byte[] src) {
-		long a = MathUtils.byteArrayToLong(des, false, 8);
-		long b = MathUtils.byteArrayToLong(src, false, 8);
-		byte[] ret = MathUtils.longToByteArray(a - b, false, 8);
-		
-		return ret;
-	}
-
 }

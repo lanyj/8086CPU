@@ -1,17 +1,20 @@
 package cn.jay.computer.register.ipregister;
 
 import cfg.Configer;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class IP {
 	public static long IP = 0;
 	public static int INSTRUCTION_LENGTH = Configer.getInstructionLength();
 	
-	public final static void setIP(byte[] data) throws CopyArrayException {
+	public final static void setIP(byte[] data) {
 		IP = 0;
 		for(int i = 0;i < data.length;i++) {
 			IP |= data[i] << i;
 		}
+	}
+	
+	public final static void setIP(long value) {
+		IP = value;
 	}
 	
 	public final static byte[] getIP() {
