@@ -19,10 +19,7 @@ public class POPF extends Execution {
 			break;
 		}
 		case 0:{
-			try {
-				FLAGS.setFLAGS(Memoryer.read(SP.getSP(), SS.getSS(), true));
-			} catch (Exception e) {
-			}
+			FLAGS.setFLAGS(Memoryer.read(SP.getSP(), SS.getSS(), true));
 			
 			SP.add2();
 			

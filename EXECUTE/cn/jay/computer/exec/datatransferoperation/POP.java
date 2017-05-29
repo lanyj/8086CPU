@@ -22,57 +22,48 @@ public class POP extends Execution {
 
 		return ret;
 	}
-	
-	public void exec() {
+
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
 			break;
 		}
-		case 0:{
+		case 0: {
 			BaseRegister env = Environment.getDataSegment();
 			BIU.getInstruction();
-			
+
 			String MOD = getOperand("MOD");
 			String RM = getOperand("R/M");
-			
+
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, true);
-			
-			if(addr == null) {
-				try {
-					RegisterMgr.setDATA(RM, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
-				} catch (Exception e) {
-				}
+
+			if (addr == null) {
+				RegisterMgr.setDATA(RM, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
 			} else {
 				Memoryer.write(addr, env.getDATA(), Memoryer.read(SP.getSP(), SS.getSS(), true), true);
 			}
-			
+
 			SP.add2();
-			
+
 			break;
 		}
-		case 1:{
+		case 1: {
 			String REG = getOperand("REG");
-			
-			try {
-				RegisterMgr.setDATA(REG, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
-			} catch (Exception e) {
-			}
-			
+
+			RegisterMgr.setDATA(REG, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
+
 			SP.add2();
-			
+
 			break;
 		}
-		case 2:{
+		case 2: {
 			String SEG = getOperand("SEG");
-			
-			try {
-				RegisterMgr.setDATA(SEG, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
-			} catch (Exception e) {
-			}
-			
+
+			RegisterMgr.setDATA(SEG, true, Memoryer.read(SP.getSP(), SS.getSS(), true));
+
 			SP.add2();
-			
+
 			break;
 		}
 		}

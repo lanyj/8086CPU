@@ -160,22 +160,22 @@
 		</category>
 		
 		<category name="AND">
-			<subcategory opcode="001000**********" operand="(D)(W)(MOD)(R/M)">and reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="001000**********" operand="(D)(W)(MOD)(REG)(R/M)">and reg/mem with reg/mem to either</subcategory>
 			<subcategory opcode="1000000***100***" operand="(W)(MOD)(R/M)">and imme with reg/mem to reg/mem</subcategory>
 			<subcategory opcode="0010010*" operand="(W)">and imme with acc</subcategory>
 		</category>
 		<category name="TEST">
-			<subcategory opcode="1000010*********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000010*********" operand="(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
 			<subcategory opcode="1111011***000***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
 			<subcategory opcode="1010100*" operand="(W)">imme with acc</subcategory>
 		</category>
 		<category name="OR">
-			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
 			<subcategory opcode="1000000***001***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
 			<subcategory opcode="0000110*" operand="(W)">imme with acc</subcategory>
 		</category>
 		<category name="XOR">
-			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(R/M)">reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
 			<subcategory opcode="1000000***110***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
 			<subcategory opcode="0011010*" operand="(W)">imme with acc</subcategory>
 		</category>
@@ -218,7 +218,7 @@
 			<subcategory opcode="1100101*" operand="(W)">intersegment (adding imme to SP)</subcategory>
 		</category>
 		<category name="JMP_ALL">
-			<subcategory opcode="0111****" operand="(D)(MOD)">jump with con</subcategory>
+			<subcategory opcode="0111****" operand="(D)(REG)">jump with con</subcategory>
 		</category>
 		<category name="LOOP">
 			<subcategory opcode="11100010" operand="">loop cx times</subcategory>
@@ -271,7 +271,7 @@
 			<subcategory opcode="10011011" operand="">wait</subcategory>
 		</category>
 		<category name="ESC">
-			<subcategory opcode="11011********" operand="(REG)(MOD)(D)(SEG)(R/M)">escape(to External device)</subcategory>
+			<subcategory opcode="11011***********" operand="(REG)(MOD)(D)(SEG)(R/M)">escape(to External device)</subcategory>
 		</category>
 		<category name="LOCK">
 			<subcategory opcode="11110000" operand="">bus lock prefix</subcategory>

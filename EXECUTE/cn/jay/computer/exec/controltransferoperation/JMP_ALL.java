@@ -23,7 +23,7 @@ public class JMP_ALL extends Execution {
 			break;
 		}
 		case 0: {
-			String index = getOperand("D") + getOperand("MOD");
+			String index = getOperand("D") + getOperand("REG");
 			boolean p = JMP_Analyzer.canJmp(index);
 			if(!p) {
 				return;

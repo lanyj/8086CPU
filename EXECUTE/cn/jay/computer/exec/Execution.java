@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jay.computer.alu.MathUtils;
+import cn.jay.computer.register.ipregister.IP;
 
 //64 bit
 public class Execution {
@@ -40,7 +41,7 @@ public class Execution {
 		}
 	}
 
-	public boolean match(String c1, String c2) {
+	public boolean match(String c1, String c2) throws Exception {
 		operandValue.clear();
 		String cs = c1 + c2;
 		String pat = "";
@@ -115,20 +116,25 @@ public class Execution {
 		return index;
 	}
 
-	public void exec() {}
+	public void exec() throws Exception {}
 	
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(opcode + " + " + operand + " -> " + describle);
+		sb.append(this.getClass() + "\t" + opcode + " + " + operand + " -> " + describle + "\n");
 
 		sb.append(Arrays.toString(operandName.toArray(new String[]{})) + "\n");
 		sb.append(Arrays.toString(operandValue.toArray(new String[]{})));
 		return sb.toString();
 	}
 	
-	public static boolean match(String c1, String c2, Execution exc) {
-		return exc.match(c1, c2);
+	public static boolean match(String c1, String c2, Execution exc) throws Exception {
+		try {
+			return exc.match(c1, c2);
+		}catch (Exception e) {
+			System.out.println(exc + " -> IP = " + IP.getIPLongValue());
+		}
+		return false;
 	}
 	
 	public static byte[] arrayConcat(byte[] low,byte[] high) {
@@ -184,7 +190,7 @@ public class Execution {
 		byte[] ret = MathUtils.longToByteArray(a + b, false, 16);
 
 		MathUtils.copyArray(des, ret);
-		return ret;
+		return des;
 	}	
 
 	public static byte[] add8(byte[] des, byte[] src) {
@@ -193,7 +199,7 @@ public class Execution {
 		byte[] ret = MathUtils.longToByteArray(a + b, false, 8);
 		
 		MathUtils.copyArray(des, ret);
-		return ret;
+		return des;
 	}
 
 	public static byte[] sub16(byte[] des, byte[] src) {
@@ -202,7 +208,7 @@ public class Execution {
 		byte[] ret = MathUtils.longToByteArray(a - b, false, 16);
 
 		MathUtils.copyArray(des, ret);
-		return ret;
+		return des;
 	}
 
 	public static byte[] sub8(byte[] des, byte[] src) {
@@ -211,6 +217,6 @@ public class Execution {
 		byte[] ret = MathUtils.longToByteArray(a - b, false, 8);
 		
 		MathUtils.copyArray(des, ret);
-		return ret;
+		return des;
 	}
 }

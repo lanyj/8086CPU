@@ -12,20 +12,20 @@ import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.flagregister.FLAGS;
 
 public class ADC extends Execution {
-	
+
 	private static final byte[] ONE16 = new byte[16];
 	private static final byte[] ONE8 = new byte[8];
-	
+
 	static {
 		ONE16[0] = 1;
 		ONE8[0] = 1;
 	}
-	
+
 	public ADC(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -47,43 +47,32 @@ public class ADC extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-					
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
+
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				if(FLAGS.getFLAGS(FLAGS.CF)) {
-					if(W) {
-						LongALU.add16(a2, ONE16);
-					} else {
-						LongALU.add8(a2, ONE8);
-					}
-				}
-			}catch (Exception e) {
-			}
-			try {
-				a1 = RegisterMgr.getDATA(REG, W);
+			if (FLAGS.getFLAGS(FLAGS.CF)) {
 				if (W) {
-					LongALU.add16(a1, a2);
+					LongALU.add16(a2, ONE16);
 				} else {
-					LongALU.add8(a1, a2);
+					LongALU.add8(a2, ONE8);
 				}
-			} catch (Exception e1) {
+			}
+			a1 = RegisterMgr.getDATA(REG, W);
+			if (W) {
+				LongALU.add16(a1, a2);
+			} else {
+				LongALU.add8(a1, a2);
 			}
 
 			if (D) {
-				try {
-					RegisterMgr.setDATA(REG, W, a1);
-				} catch (Exception e) {
-				}
+				RegisterMgr.setDATA(REG, W, a1);
 			} else {
-				try {
+				if(addr == null) {
+					RegisterMgr.setDATA(RM, W, a1);
+				} else{
 					Memoryer.write(addr, env.getDATA(), a1, W);
-				} catch (Exception e) {
 				}
 			}
 
@@ -105,44 +94,35 @@ public class ADC extends Execution {
 			byte[] a2 = null;
 
 			if (addr == null) {
-				try {
-					a1 = RegisterMgr.getDATA(RM, W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a2, ONE16);
-						}
-						LongALU.add16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a2, ONE8);
-						}
-						LongALU.add8(a1, a2);
+				a1 = RegisterMgr.getDATA(RM, W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a2, ONE16);
 					}
-				} catch (Exception e1) {
+					LongALU.add16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a2, ONE8);
+					}
+					LongALU.add8(a1, a2);
 				}
-				try {
-					RegisterMgr.setDATA(RM, W, a1);
-				} catch (Exception e) {
-				}
+				RegisterMgr.setDATA(RM, W, a1);
 			} else {
-				try {
-					a1 = Memoryer.read(addr, env.getDATA(), W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a2, ONE16);
-						}
-						LongALU.add16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a2, ONE8);
-						}
-						LongALU.add8(a1, a2);
+				a1 = Memoryer.read(addr, env.getDATA(), W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a2, ONE16);
 					}
-				} catch (Exception e1) {
+					LongALU.add16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a2, ONE8);
+					}
+					LongALU.add8(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -154,25 +134,22 @@ public class ADC extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 
-			try {
-				if (W) {
-					a1 = AX.getAX();
-					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					if(FLAGS.getFLAGS(FLAGS.CF)){
-						LongALU.add16(a2, ONE16);
-					}
-					LongALU.add16(a1, a2);
-					AX.setAX(a1);
-				} else {
-					a1 = AX.getAL();
-					a2 = BIU.getInstruction();
-					if(FLAGS.getFLAGS(FLAGS.CF)){
-						LongALU.add8(a2, ONE8);
-					}
-					LongALU.add8(a1, a2);
-					AX.setAL(a1);
+			if (W) {
+				a1 = AX.getAX();
+				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+				if (FLAGS.getFLAGS(FLAGS.CF)) {
+					LongALU.add16(a2, ONE16);
 				}
-			} catch (Exception e1) {
+				LongALU.add16(a1, a2);
+				AX.setAX(a1);
+			} else {
+				a1 = AX.getAL();
+				a2 = BIU.getInstruction();
+				if (FLAGS.getFLAGS(FLAGS.CF)) {
+					LongALU.add8(a2, ONE8);
+				}
+				LongALU.add8(a1, a2);
+				AX.setAL(a1);
 			}
 			break;
 		}

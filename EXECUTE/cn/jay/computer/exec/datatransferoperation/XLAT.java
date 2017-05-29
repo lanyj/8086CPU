@@ -14,7 +14,7 @@ public class XLAT extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws CopyArrayException {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -25,10 +25,7 @@ public class XLAT extends Execution {
 
 			byte[] addr = BX.getBX();
 			addr = add16(addr, AX.getAL());
-			try {
-				AX.setAL(Memoryer.read(addr, env.getDATA(), false));
-			} catch (CopyArrayException e) {
-			}
+			AX.setAL(Memoryer.read(addr, env.getDATA(), false));
 			break;
 		}
 		}

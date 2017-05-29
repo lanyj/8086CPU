@@ -13,7 +13,7 @@ public class SCAS extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -24,15 +24,12 @@ public class SCAS extends Execution {
 
 			byte[] src = null;
 			byte[] des = Memoryer.read(DI.getDI(), ES.getES(), W);
-			try {
-				if (W) {
-					src = AX.getAX();
-					LongALU.sub16(src, des);
-				} else {
-					src = AX.getAL();
-					LongALU.sub8(src, des);
-				}
-			} catch (Exception e) {
+			if (W) {
+				src = AX.getAX();
+				LongALU.sub16(src, des);
+			} else {
+				src = AX.getAL();
+				LongALU.sub8(src, des);
 			}
 
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);

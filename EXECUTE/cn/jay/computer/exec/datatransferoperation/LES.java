@@ -11,12 +11,12 @@ import cn.jay.computer.register.segmentregister.ES;
 
 public class LES extends Execution {
 	private static final byte[] TWO = { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	
+
 	public LES(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -26,23 +26,25 @@ public class LES extends Execution {
 			BIU.getInstruction();
 
 			BaseRegister env = Environment.getDataSegment();
-			
+
 			String MOD = getOperand("MOD");
 			String REG = getOperand("REG");
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, true);
 
-			byte[] low = Memoryer.read(addr, env.getDATA(), true);
-			byte[] high = Memoryer.read(add16(addr, TWO), env.getDATA(), true);
-			try {
-				RegisterMgr.setDATA(REG, true, low);
-				ES.setES(high);
-			} catch (Exception e) {
+			byte[] low = null;
+			if(addr == null) {
+				low = RegisterMgr.getDATA(RM, true);
+			} else {
+				low = Memoryer.read(addr, env.getDATA(), true);
 			}
-			
+			byte[] high = Memoryer.read(add16(addr, TWO), env.getDATA(), true);
+			RegisterMgr.setDATA(REG, true, low);
+			ES.setES(high);
+
 			break;
 		}
 		}
 	}
-	
+
 }

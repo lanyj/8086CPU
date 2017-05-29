@@ -23,7 +23,7 @@ public class DEC extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -39,39 +39,32 @@ public class DEC extends Execution {
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
 
-			try {
-				if (addr == null) {
-					byte[] a = RegisterMgr.getDATA(RM, W);
+			if (addr == null) {
+				byte[] a = RegisterMgr.getDATA(RM, W);
 
-					if (W) {
-						LongALU.sub16(a, ONE16);
-					} else {
-						LongALU.sub8(a, ONE8);
-					}
-					RegisterMgr.setDATA(RM, W, a);
+				if (W) {
+					LongALU.sub16(a, ONE16);
 				} else {
-					byte[] a = null;
-					if (W) {
-						a = Memoryer.read(addr, env.getDATA(), W);
-						LongALU.sub16(a, ONE16);
-					} else {
-						LongALU.sub8(a, ONE8);
-					}
-					Memoryer.write(addr, env.getDATA(), a, W);
+					LongALU.sub8(a, ONE8);
 				}
-			} catch (Exception e) {
+				RegisterMgr.setDATA(RM, W, a);
+			} else {
+				byte[] a = Memoryer.read(addr, env.getDATA(), W);
+				if (W) {
+					LongALU.sub16(a, ONE16);
+				} else {
+					LongALU.sub8(a, ONE8);
+				}
+				Memoryer.write(addr, env.getDATA(), a, W);
 			}
 
 			break;
 		}
 		case 1: {
 			String REG = getOperand("REG");
-			try {
-				byte[] a = RegisterMgr.getDATA(REG, true);
-				LongALU.sub16(a, ONE16);
-				RegisterMgr.setDATA(REG, true, a);
-			} catch (Exception e1) {
-			}
+			byte[] a = RegisterMgr.getDATA(REG, true);
+			LongALU.sub16(a, ONE16);
+			RegisterMgr.setDATA(REG, true, a);
 			break;
 		}
 		}

@@ -9,21 +9,20 @@ import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.baseregister.RegisterMgr;
 import cn.jay.computer.register.ipregister.IP;
 import cn.jay.computer.register.segmentregister.CS;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class JMP extends Execution {
 
 	private static final byte[] TWO16 = new byte[16];
-	
+
 	static {
 		TWO16[1] = 1;
 	}
-	
+
 	public JMP(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -31,17 +30,17 @@ public class JMP extends Execution {
 		}
 		case 0: {
 			boolean W = getOperand("W").equals("0");
-			if(W) {
+			if (W) {
 				byte[] low = BIU.getInstruction();
 				byte[] high = BIU.getInstruction();
-				
+
 				byte[] ip = arrayConcat(low, high);
-				
+
 				long disp = byteArrayToLong(ip, true, 16);
 				IP.setIP(IP.getIPLongValue() + disp);
 			} else {
 				byte[] ip = BIU.getInstruction();
-				
+
 				long disp = byteArrayToLong(ip, true, 8);
 				IP.setIP(IP.getIPLongValue() + disp);
 			}
@@ -56,10 +55,7 @@ public class JMP extends Execution {
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, true);
 
 			if (addr == null) {
-				try {
-					IP.setIP(IP.getIPLongValue() + byteArrayToLong(RegisterMgr.getDATA(RM, true), true, 16));
-				} catch (Exception e) {
-				}
+				IP.setIP(IP.getIPLongValue() + byteArrayToLong(RegisterMgr.getDATA(RM, true), true, 16));
 			} else {
 				IP.setIP(IP.getIPLongValue() + byteArrayToLong(Memoryer.read(addr, env.getDATA(), true), true, 16));
 			}
@@ -68,19 +64,16 @@ public class JMP extends Execution {
 		case 2: {
 			byte[] low = BIU.getInstruction();
 			byte[] high = BIU.getInstruction();
-			
+
 			byte[] ip = arrayConcat(low, high);
-			
+
 			low = BIU.getInstruction();
 			high = BIU.getInstruction();
-			
+
 			byte[] cs = arrayConcat(low, high);
-			
+
 			IP.setIP(IP.getIPLongValue() + byteArrayToLong(ip, true, 16));
-			try {
-				CS.setCS(cs);
-			} catch (CopyArrayException e) {
-			}
+			CS.setCS(cs);
 			break;
 		}
 		case 3: {
@@ -94,14 +87,11 @@ public class JMP extends Execution {
 			if (addr == null) {
 			} else {
 				byte[] ip = Memoryer.read(addr, env.getDATA(), true);
-				
-				byte[] cs = Memoryer.read(add16(addr,TWO16), env.getDATA(), true);
-				
+
+				byte[] cs = Memoryer.read(add16(addr, TWO16), env.getDATA(), true);
+
 				IP.setIP(IP.getIPLongValue() + byteArrayToLong(ip, true, 16));
-				try {
-					CS.setCS(cs);
-				} catch (CopyArrayException e) {
-				}
+				CS.setCS(cs);
 			}
 			break;
 		}

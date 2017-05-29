@@ -5,7 +5,7 @@ import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.flagregister.FLAGS;
 
 public class AAA extends Execution {
-	
+
 	private static final byte[] ONE8 = new byte[8];
 	private static final byte[] EIGHT8 = new byte[8];
 
@@ -18,38 +18,34 @@ public class AAA extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
 			break;
 		}
 		case 0: {
-			try {
-				byte[] a = AX.getAL();
-				
-				boolean A = a[3] > 0;
-				boolean B = a[2] > 0;
-				boolean C = a[1] > 0;
+			byte[] a = AX.getAL();
 
-				boolean P = A & (B | (!B & C));
-				
-				if(FLAGS.getFLAGS(FLAGS.AF) || P) {
-					a = add8(a, EIGHT8);
-					a[7] = a[6] = a[5] = a[4] = 0;
-					FLAGS.setFLAGS(FLAGS.AF, true);
-					FLAGS.setFLAGS(FLAGS.CF, true);
-					AX.setAL(a);
-					a = AX.getAH();
-					add8(a, ONE8);
-					AX.setAH(a);
-				} else {
-					a[7] = a[6] = a[5] = a[4] = 0;
-					AX.setAL(a);
-				}
-			} catch (Exception e) {
+			boolean A = a[3] > 0;
+			boolean B = a[2] > 0;
+			boolean C = a[1] > 0;
+
+			boolean P = A & (B | (!B & C));
+
+			if (FLAGS.getFLAGS(FLAGS.AF) || P) {
+				a = add8(a, EIGHT8);
+				a[7] = a[6] = a[5] = a[4] = 0;
+				FLAGS.setFLAGS(FLAGS.AF, true);
+				FLAGS.setFLAGS(FLAGS.CF, true);
+				AX.setAL(a);
+				a = AX.getAH();
+				add8(a, ONE8);
+				AX.setAH(a);
+			} else {
+				a[7] = a[6] = a[5] = a[4] = 0;
+				AX.setAL(a);
 			}
-
 			break;
 		}
 		}

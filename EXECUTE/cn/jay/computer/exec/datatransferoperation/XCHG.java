@@ -15,7 +15,7 @@ public class XCHG extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -25,44 +25,35 @@ public class XCHG extends Execution {
 			BIU.getInstruction();
 
 			BaseRegister env = Environment.getDataSegment();
-			
+
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
 			String REG = getOperand("REG");
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
-			try {
-				if(addr == null) {
-					byte[] v1 = RegisterMgr.getDATA(REG, W);
-					byte[] v2 = RegisterMgr.getDATA(RM, W);
-					
-					try {
-						RegisterMgr.setDATA(REG, W, v2);
-						RegisterMgr.setDATA(RM, W, v1);
-					} catch (Exception e) {
-					}
-				} else {
-					byte[] v1 = RegisterMgr.getDATA(REG, W);
-					byte[] v2 = Memoryer.read(addr, env.getDATA(), W);
-					
-					Memoryer.write(addr, env.getDATA(), v1, W);
-					RegisterMgr.setDATA(REG, W, v2);
-				}
-			}catch (Exception e) {
+			if (addr == null) {
+				byte[] v1 = RegisterMgr.getDATA(REG, W);
+				byte[] v2 = RegisterMgr.getDATA(RM, W);
+
+				RegisterMgr.setDATA(REG, W, v2);
+				RegisterMgr.setDATA(RM, W, v1);
+			} else {
+				byte[] v1 = RegisterMgr.getDATA(REG, W);
+				byte[] v2 = Memoryer.read(addr, env.getDATA(), W);
+
+				Memoryer.write(addr, env.getDATA(), v1, W);
+				RegisterMgr.setDATA(REG, W, v2);
 			}
 			break;
 		}
-		case 1:{
+		case 1: {
 			String REG = getOperand("REG");
-			try {
-				byte[] v1 = RegisterMgr.getDATA(REG, true);
-				byte[] v2 = AX.getAX();
-				
-				AX.setAX(v1);
-				RegisterMgr.setDATA(REG, true, v2);				
-			}catch (Exception e) {
-			}
+			byte[] v1 = RegisterMgr.getDATA(REG, true);
+			byte[] v2 = AX.getAX();
+
+			AX.setAX(v1);
+			RegisterMgr.setDATA(REG, true, v2);
 			break;
 		}
 		}

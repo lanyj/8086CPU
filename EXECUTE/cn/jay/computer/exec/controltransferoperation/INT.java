@@ -1,7 +1,11 @@
 package cn.jay.computer.exec.controltransferoperation;
 
+import java.util.Arrays;
+
 import cn.jay.computer.biu.BIU;
 import cn.jay.computer.exec.Execution;
+import cn.jay.computer.register.ipregister.IP;
+import cn.jay.computer.register.segmentregister.CS;
 
 public class INT extends Execution {
 
@@ -26,14 +30,14 @@ public class INT extends Execution {
 			int type = (int) byteArrayToLong(val, false, 8);
 			//TODO
 			
-			System.out.println("Interrupt, TYPE = " + type);
+			System.out.println("\nInterrupt, TYPE = " + type +  " - - - " + Arrays.toString(CS.getCS()) + ":" + IP.getIPLongValue());
 			break;
 		}
 		case 1:{
 			int type = 3;
 			//TODO
 			
-			System.out.println("Interrupt, TYPE = " + type);
+			System.out.println("\nInterrupt, TYPE = " + type +  " - - - " + Arrays.toString(CS.getCS()) + ":" + IP.getIPLongValue());
 			break;
 		}
 		}

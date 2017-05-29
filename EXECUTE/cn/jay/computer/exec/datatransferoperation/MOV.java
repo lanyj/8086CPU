@@ -8,7 +8,6 @@ import cn.jay.computer.memory.Memoryer;
 import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.baseregister.RegisterMgr;
 import cn.jay.computer.register.dataregister.AX;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class MOV extends Execution {
 
@@ -16,7 +15,7 @@ public class MOV extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -35,15 +34,13 @@ public class MOV extends Execution {
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
 
 			if (D) {
-				try {
+				if(addr == null) {
+					RegisterMgr.setDATA(REG, W, RegisterMgr.getDATA(RM, W));
+				} else {
 					RegisterMgr.setDATA(REG, W, Memoryer.read(addr, env.getDATA(), W));
-				} catch (Exception e) {
 				}
 			} else {
-				try {
-					Memoryer.write(addr, env.getDATA(), RegisterMgr.getDATA(REG, W), W);
-				} catch (Exception e) {
-				}
+				Memoryer.write(addr, env.getDATA(), RegisterMgr.getDATA(REG, W), W);
 			}
 
 			break;
@@ -55,7 +52,6 @@ public class MOV extends Execution {
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
-			String REG = getOperand("REG");
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
 
@@ -68,10 +64,7 @@ public class MOV extends Execution {
 				value = low;
 			}
 			if (addr == null) {
-				try {
-					RegisterMgr.setDATA(REG, W, value);
-				} catch (Exception e) {
-				}
+				RegisterMgr.setDATA(RM, W, value);
 			} else {
 				Memoryer.write(addr, env.getDATA(), value, W);
 			}
@@ -90,10 +83,7 @@ public class MOV extends Execution {
 				value = low;
 			}
 
-			try {
-				RegisterMgr.setDATA(REG, W, value);
-			} catch (Exception e) {
-			}
+			RegisterMgr.setDATA(REG, W, value);
 			break;
 		}
 		case 3: {
@@ -113,12 +103,17 @@ public class MOV extends Execution {
 			}
 
 			if (D) {
-				try {
-					AX.setAX(Memoryer.read(addr, env.getDATA(), W));
-				} catch (CopyArrayException e) {
+				if(W) {
+					AX.setAX(Memoryer.read(addr, env.getDATA(), true));
+				} else {
+					AX.setAL(Memoryer.read(addr, env.getDATA(), false));
 				}
 			} else {
-				Memoryer.write(addr, env.getDATA(), AX.getAX(), W);
+				if(W) {
+					Memoryer.write(addr, env.getDATA(), AX.getAX(), W);
+				} else {
+					Memoryer.write(addr, env.getDATA(), AX.getAL(), W);
+				}
 			}
 			break;
 		}
@@ -133,14 +128,16 @@ public class MOV extends Execution {
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, true);
 
 			if (D) {
-				try {
+				if(addr == null) {
+					RegisterMgr.setDATA(SEG, true, RegisterMgr.getDATA(RM, true));
+				} else {
 					RegisterMgr.setDATA(SEG, true, Memoryer.read(addr, env.getDATA(), true));
-				} catch (Exception e) {
 				}
 			} else {
-				try {
+				if(addr == null) {
+					RegisterMgr.setDATA(RM, true, RegisterMgr.getDATA(SEG, true));
+				} else {
 					Memoryer.write(addr, env.getDATA(), RegisterMgr.getDATA(SEG, true), true);
-				} catch (Exception e) {
 				}
 			}
 			break;

@@ -15,8 +15,8 @@ public class MemoryManager extends Client implements IOInterface {
 	}
 	
 	
-	public void test() throws Exception {
-		InputStream is = new FileInputStream(new File(System.getProperty("user.dir") + "/Dos6.22-5.25.img"));
+	public void test(String path) throws Exception {
+		InputStream is = new FileInputStream(new File(path));
 		int b = is.read();
 		int i = 0;
 		for(;b != -1;i++) {
@@ -51,6 +51,6 @@ public class MemoryManager extends Client implements IOInterface {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		new MemoryManager(102400).test();
+		new MemoryManager(102400).test(System.getProperty("user.dir") + "/Dos6.22-5.25.img");
 	}
 }

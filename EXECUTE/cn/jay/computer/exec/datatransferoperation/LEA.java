@@ -11,7 +11,7 @@ public class LEA extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -25,14 +25,15 @@ public class LEA extends Execution {
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, true);
 
-			try {
+			if(addr == null) {
+				RegisterMgr.setDATA(REG, true, RegisterMgr.getDATA(RM, true));
+			} else {
 				RegisterMgr.setDATA(REG, true, addr);
-			} catch (Exception e) {
 			}
-			
+
 			break;
 		}
 		}
-		}
+	}
 
 }

@@ -622,10 +622,10 @@ public class LongALU {
 	
 	private static void saslSetFlags16(byte[] ret,boolean useAL) {
 		FLAGS.setFLAGS(FLAGS.CF, ret[16 % ret.length] > 0);
-		FLAGS.setFLAGS(FLAGS.OF, ret[16 % ret.length] != ret[15]);
-		FLAGS.setFLAGS(FLAGS.SF, ret[15] > 0);
+		FLAGS.setFLAGS(FLAGS.OF, ret[16 % ret.length] != ret[ret.length - 1]);
+		FLAGS.setFLAGS(FLAGS.SF, ret[ret.length - 1] > 0);
 		boolean zf = true;
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < ret.length - 1; i++) {
 			if (ret[i] > 0) {
 				zf = false;
 				break;

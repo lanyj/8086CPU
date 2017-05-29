@@ -11,12 +11,12 @@ import cn.jay.computer.register.segmentregister.DS;
 
 public class LDS extends Execution {
 	private static final byte[] TWO = { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-	
+
 	public LDS(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -26,7 +26,7 @@ public class LDS extends Execution {
 			BIU.getInstruction();
 
 			BaseRegister env = Environment.getDataSegment();
-			
+
 			String MOD = getOperand("MOD");
 			String REG = getOperand("REG");
 			String RM = getOperand("R/M");
@@ -34,12 +34,9 @@ public class LDS extends Execution {
 
 			byte[] low = Memoryer.read(addr, env.getDATA(), true);
 			byte[] high = Memoryer.read(add16(addr, TWO), env.getDATA(), true);
-			try {
-				RegisterMgr.setDATA(REG, true, low);
-				DS.setDS(high);
-			} catch (Exception e) {
-			}
-			
+			RegisterMgr.setDATA(REG, true, low);
+			DS.setDS(high);
+
 			break;
 		}
 		}

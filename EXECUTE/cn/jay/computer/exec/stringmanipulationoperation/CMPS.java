@@ -15,7 +15,7 @@ public class CMPS extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -27,13 +27,10 @@ public class CMPS extends Execution {
 
 			byte[] src = Memoryer.read(SI.getSI(), env.getDATA(), W);
 			byte[] des = Memoryer.read(DI.getDI(), ES.getES(), W);
-			try {
-				if (W) {
-					LongALU.sub16(src, des);
-				} else {
-					LongALU.sub8(src, des);
-				}
-			} catch (Exception e) {
+			if (W) {
+				LongALU.sub16(src, des);
+			} else {
+				LongALU.sub8(src, des);
 			}
 
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);

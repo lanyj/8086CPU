@@ -22,17 +22,14 @@ public class STOS extends Execution {
 			boolean W = getOperand("W").equals("1");
 
 			byte[] src = null;
-			try {
-				if (W) {
-					src = AX.getAX();
-				} else {
-					src = AX.getAL();
-				}
-			} catch (Exception e) {
+			if (W) {
+				src = AX.getAX();
+			} else {
+				src = AX.getAL();
 			}
 
 			Memoryer.write(DI.getDI(), ES.getES(), src, W);
-			
+
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);
 			if (df) {
 				if (W) {

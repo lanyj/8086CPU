@@ -15,7 +15,7 @@ public class LODS extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -23,20 +23,17 @@ public class LODS extends Execution {
 		}
 		case 0: {
 			BaseRegister env = Environment.getDataSegment();
-			
+
 			boolean W = getOperand("W").equals("1");
 
 			byte[] src = null;
 			byte[] des = Memoryer.read(SI.getSI(), env.getDATA(), W);
-			try {
-				if (W) {
-					src = AX.getAX();
-					LongALU.sub16(src, des);
-				} else {
-					src = AX.getAL();
-					LongALU.sub8(src, des);
-				}
-			} catch (Exception e) {
+			if (W) {
+				src = AX.getAX();
+				LongALU.sub16(src, des);
+			} else {
+				src = AX.getAL();
+				LongALU.sub8(src, des);
 			}
 
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);

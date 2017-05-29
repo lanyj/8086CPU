@@ -12,20 +12,20 @@ import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.flagregister.FLAGS;
 
 public class SBB extends Execution {
-	
+
 	private static final byte[] ONE16 = new byte[16];
 	private static final byte[] ONE8 = new byte[8];
-	
+
 	static {
 		ONE16[0] = 1;
 		ONE8[0] = 1;
 	}
-	
+
 	public SBB(String opcode, String operand, String describle, int index) {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -47,49 +47,41 @@ public class SBB extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				a1 = RegisterMgr.getDATA(REG, W);
-			} catch (Exception e1) {
-			}
+			a1 = RegisterMgr.getDATA(REG, W);
 
 			if (D) {
-				try {
-					if (W) {
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a2, ONE16);
-						}
-						LongALU.sub16(a1, a2);
-					} else {
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a2, ONE8);
-						}
-						LongALU.sub8(a1, a2);
+				if (W) {
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a2, ONE16);
 					}
-					RegisterMgr.setDATA(REG, W, a1);
-				} catch (Exception e) {
+					LongALU.sub16(a1, a2);
+				} else {
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a2, ONE8);
+					}
+					LongALU.sub8(a1, a2);
 				}
+				RegisterMgr.setDATA(REG, W, a1);
 			} else {
-				try {
-					if (W) {
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a1, ONE16);
-						}
-						LongALU.sub16(a2, a1);
-					} else {
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a1, ONE8);
-						}
-						LongALU.sub8(a2, a1);
+				if (W) {
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a1, ONE16);
 					}
+					LongALU.sub16(a2, a1);
+				} else {
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a1, ONE8);
+					}
+					LongALU.sub8(a2, a1);
+				}
+				if(addr == null) {
+					RegisterMgr.setDATA(RM, W, a2);
+				} else{
 					Memoryer.write(addr, env.getDATA(), a2, W);
-				} catch (Exception e) {
 				}
 			}
 
@@ -111,44 +103,35 @@ public class SBB extends Execution {
 			byte[] a2 = null;
 
 			if (addr == null) {
-				try {
-					a1 = RegisterMgr.getDATA(RM, W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a2, ONE16);
-						}
-						LongALU.sub16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a2, ONE8);
-						}
-						LongALU.sub8(a1, a2);
+				a1 = RegisterMgr.getDATA(RM, W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a2, ONE16);
 					}
-				} catch (Exception e1) {
+					LongALU.sub16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a2, ONE8);
+					}
+					LongALU.sub8(a1, a2);
 				}
-				try {
-					RegisterMgr.setDATA(RM, W, a1);
-				} catch (Exception e) {
-				}
+				RegisterMgr.setDATA(RM, W, a1);
 			} else {
-				try {
-					a1 = Memoryer.read(addr, env.getDATA(), W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add16(a2, ONE16);
-						}
-						LongALU.sub16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						if(FLAGS.getFLAGS(FLAGS.CF)){
-							LongALU.add8(a2, ONE8);
-						}
-						LongALU.sub8(a1, a2);
+				a1 = Memoryer.read(addr, env.getDATA(), W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add16(a2, ONE16);
 					}
-				} catch (Exception e1) {
+					LongALU.sub16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					if (FLAGS.getFLAGS(FLAGS.CF)) {
+						LongALU.add8(a2, ONE8);
+					}
+					LongALU.sub8(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -160,25 +143,22 @@ public class SBB extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 
-			try {
-				if (W) {
-					a1 = AX.getAX();
-					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					if(FLAGS.getFLAGS(FLAGS.CF)){
-						LongALU.add16(a2, ONE16);
-					}
-					LongALU.sub16(a1, a2);
-					AX.setAX(a1);
-				} else {
-					a1 = AX.getAL();
-					a2 = BIU.getInstruction();
-					if(FLAGS.getFLAGS(FLAGS.CF)){
-						LongALU.add8(a2, ONE8);
-					}
-					LongALU.sub8(a1, a2);
-					AX.setAL(a1);
+			if (W) {
+				a1 = AX.getAX();
+				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+				if (FLAGS.getFLAGS(FLAGS.CF)) {
+					LongALU.add16(a2, ONE16);
 				}
-			} catch (Exception e1) {
+				LongALU.sub16(a1, a2);
+				AX.setAX(a1);
+			} else {
+				a1 = AX.getAL();
+				a2 = BIU.getInstruction();
+				if (FLAGS.getFLAGS(FLAGS.CF)) {
+					LongALU.add8(a2, ONE8);
+				}
+				LongALU.sub8(a1, a2);
+				AX.setAL(a1);
 			}
 			break;
 		}

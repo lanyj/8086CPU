@@ -15,7 +15,7 @@ public class XOR extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -30,44 +30,35 @@ public class XOR extends Execution {
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
-			String REG = getOperand("REG");
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
 
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				a1 = RegisterMgr.getDATA(REG, W);
-			} catch (Exception e1) {
-			}
+			a1 = RegisterMgr.getDATA(RM, W);
 
 			if (D) {
-				try {
-					if (W) {
-						LongALU.xor16(a1, a2);
-					} else {
-						LongALU.xor8(a1, a2);
-					}
-					RegisterMgr.setDATA(REG, W, a1);
-				} catch (Exception e) {
+				if (W) {
+					LongALU.xor16(a1, a2);
+				} else {
+					LongALU.xor8(a1, a2);
 				}
+				RegisterMgr.setDATA(RM, W, a1);
 			} else {
-				try {
-					if (W) {
-						LongALU.xor16(a2, a1);
-					} else {
-						LongALU.xor8(a2, a1);
-					}
+				if (W) {
+					LongALU.xor16(a2, a1);
+				} else {
+					LongALU.xor8(a2, a1);
+				}
+				if(addr == null) {
+					RegisterMgr.setDATA(RM, W, a2);
+				} else{
 					Memoryer.write(addr, env.getDATA(), a2, W);
-				} catch (Exception e) {
 				}
 			}
 

@@ -15,7 +15,7 @@ public class TEST extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -26,7 +26,6 @@ public class TEST extends Execution {
 
 			BIU.getInstruction();
 
-			boolean D = getOperand("D").equals("1");
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
@@ -37,36 +36,16 @@ public class TEST extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				a1 = RegisterMgr.getDATA(REG, W);
-			} catch (Exception e1) {
-			}
+			a1 = RegisterMgr.getDATA(REG, W);
 
-			if (D) {
-				try {
-					if (W) {
-						LongALU.and16(a1, a2);
-					} else {
-						LongALU.and8(a1, a2);
-					}
-				} catch (Exception e) {
-				}
+			if (W) {
+				LongALU.and16(a1, a2);
 			} else {
-				try {
-					if (W) {
-						LongALU.and16(a2, a1);
-					} else {
-						LongALU.and8(a2, a1);
-					}
-				} catch (Exception e) {
-				}
+				LongALU.and8(a1, a2);
 			}
 
 			break;
@@ -76,8 +55,6 @@ public class TEST extends Execution {
 
 			BIU.getInstruction();
 
-			@SuppressWarnings("unused")
-			boolean S = getOperand("D").equals("1");
 			boolean W = getOperand("W").equals("1");
 
 			String MOD = getOperand("MOD");
@@ -87,28 +64,22 @@ public class TEST extends Execution {
 			byte[] a2 = null;
 
 			if (addr == null) {
-				try {
-					a1 = RegisterMgr.getDATA(RM, W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.and16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						LongALU.and8(a1, a2);
-					}
-				} catch (Exception e1) {
+				a1 = RegisterMgr.getDATA(RM, W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					LongALU.and16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					LongALU.and8(a1, a2);
 				}
 			} else {
-				try {
-					a1 = Memoryer.read(addr, env.getDATA(), W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.and16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						LongALU.and8(a1, a2);
-					}
-				} catch (Exception e1) {
+				a1 = Memoryer.read(addr, env.getDATA(), W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					LongALU.and16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					LongALU.and8(a1, a2);
 				}
 			}
 			break;
@@ -119,17 +90,14 @@ public class TEST extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 
-			try {
-				if (W) {
-					a1 = AX.getAX();
-					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.and16(a1, a2);
-				} else {
-					a1 = AX.getAL();
-					a2 = BIU.getInstruction();
-					LongALU.and8(a1, a2);
-				}
-			} catch (Exception e1) {
+			if (W) {
+				a1 = AX.getAX();
+				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+				LongALU.and16(a1, a2);
+			} else {
+				a1 = AX.getAL();
+				a2 = BIU.getInstruction();
+				LongALU.and8(a1, a2);
 			}
 			break;
 		}

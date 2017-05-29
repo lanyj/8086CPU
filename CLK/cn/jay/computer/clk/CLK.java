@@ -34,8 +34,6 @@ public class CLK extends Thread {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
 			}
-			System.out.println("dojob - " + COUNTER.isZero());
-			
 			synchronized (COUNTER) {
 				if(!COUNTER.isZero()) {
 					continue;

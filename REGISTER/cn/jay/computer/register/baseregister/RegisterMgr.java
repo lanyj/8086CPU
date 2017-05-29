@@ -1,7 +1,5 @@
 package cn.jay.computer.register.baseregister;
 
-import java.util.Arrays;
-
 import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.dataregister.BX;
 import cn.jay.computer.register.dataregister.CX;
@@ -17,7 +15,7 @@ import cn.jay.computer.register.segmentregister.SS;
 
 public class RegisterMgr {
 	public static final void setDATA(String REG, boolean W, byte[] value) throws Exception {
-		System.out.println("Set register data: REG = " + REG + ", W = " + W + ", val = " + Arrays.toString(value));
+//		System.out.println("Set register data: REG = " + REG + ", W = " + W + ", val = " + Arrays.toString(value));
 		switch (REG) {
 		case "000":{
 			if(W)
@@ -97,7 +95,7 @@ public class RegisterMgr {
 		}
 	}
 	public static final byte[] getDATA(String REG, boolean W) throws Exception {
-		System.out.println("Get register data: REG = " + REG + ", W = " + W);
+//		System.out.println("Get register data: REG = " + REG + ", W = " + W);
 		switch (REG) {
 		case "000":{
 			if(W)

@@ -17,19 +17,16 @@ public class AAM extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
 			break;
 		}
 		case 0: {
-			try {
-				byte[][] ret = divide8(AX.getAL(), TEN8);
-				AX.setAH(ret[0]);
-				AX.setAL(ret[1]);
-			} catch (Exception e) {
-			}
+			byte[][] ret = divide8(AX.getAL(), TEN8);
+			AX.setAH(ret[0]);
+			AX.setAL(ret[1]);
 
 			break;
 		}

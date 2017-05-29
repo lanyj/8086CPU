@@ -18,7 +18,7 @@ public class NEG extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -34,33 +34,30 @@ public class NEG extends Execution {
 			String RM = getOperand("R/M");
 			byte[] addr = RM_MOD_Analyzer.analyze(MOD, RM, W);
 
-			try {
-				if (addr == null) {
-					byte[] ret = null;
-					byte[] a = RegisterMgr.getDATA(RM, W);
+			if (addr == null) {
+				byte[] ret = null;
+				byte[] a = RegisterMgr.getDATA(RM, W);
 
-					if (W) {
-						ret = ZERO16.clone();
-						LongALU.sub16(ret, a);
-					} else {
-						ret = ZERO8.clone();
-						LongALU.sub8(ret, a);
-					}
-					RegisterMgr.setDATA(RM, W, ret);
+				if (W) {
+					ret = ZERO16.clone();
+					LongALU.sub16(ret, a);
 				} else {
-					byte[] ret = null;
-					byte[] a = null;
-					if (W) {
-						a = Memoryer.read(addr, env.getDATA(), W);
-						ret = ZERO16.clone();
-						LongALU.sub16(ret, a);
-					} else {
-						ret = ZERO8.clone();
-						LongALU.sub8(ret, a);
-					}
-					Memoryer.write(addr, env.getDATA(), ret, W);
+					ret = ZERO8.clone();
+					LongALU.sub8(ret, a);
 				}
-			} catch (Exception e) {
+				RegisterMgr.setDATA(RM, W, ret);
+			} else {
+				byte[] ret = null;
+				byte[] a = null;
+				if (W) {
+					a = Memoryer.read(addr, env.getDATA(), W);
+					ret = ZERO16.clone();
+					LongALU.sub16(ret, a);
+				} else {
+					ret = ZERO8.clone();
+					LongALU.sub8(ret, a);
+				}
+				Memoryer.write(addr, env.getDATA(), ret, W);
 			}
 
 			break;

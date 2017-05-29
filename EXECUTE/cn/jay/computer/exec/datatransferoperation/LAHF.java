@@ -11,17 +11,17 @@ public class LAHF extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws CopyArrayException {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
 			break;
 		}
 		case 0:{
-			try {
-				AX.setAH(FLAGS.getFLAGS());
-			} catch (CopyArrayException e) {
-			}
+			byte[] flags = FLAGS.getFLAGS();
+			byte[] low = new byte[8];
+			arraySplit(new byte[8], low, flags);
+			AX.setAH(low);
 			
 			break;
 		}

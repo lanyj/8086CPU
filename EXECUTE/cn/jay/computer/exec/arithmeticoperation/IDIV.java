@@ -16,7 +16,7 @@ public class IDIV extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -37,34 +37,28 @@ public class IDIV extends Execution {
 			byte[] p2 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				if (W) {
-					p1 = DX.getDX();
-					p2 = AX.getAX();
-					
-					byte[] value = arrayConcat(p2, p1);
-					LongALU.idivide16(value, a2);
-					
-					byte[] high = new byte[16];
-					byte[] low = new byte[16];
-					arraySplit(high, low, value);
-					
-					AX.setAX(low);
-					DX.setDX(high);
-				} else {
-					byte[] value = AX.getAX();
-					LongALU.idivide8(value, a2);
-					
-					AX.setAX(value);
-				}
-			} catch (Exception e1) {
+			if (W) {
+				p1 = DX.getDX();
+				p2 = AX.getAX();
+
+				byte[] value = arrayConcat(p2, p1);
+				LongALU.idivide16(value, a2);
+
+				byte[] high = new byte[16];
+				byte[] low = new byte[16];
+				arraySplit(high, low, value);
+
+				AX.setAX(low);
+				DX.setDX(high);
+			} else {
+				byte[] value = AX.getAX();
+				LongALU.idivide8(value, a2);
+
+				AX.setAX(value);
 			}
 			break;
 		}

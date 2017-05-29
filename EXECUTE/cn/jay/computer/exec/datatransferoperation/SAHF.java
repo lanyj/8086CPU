@@ -17,7 +17,7 @@ public class SAHF extends Execution {
 			break;
 		}
 		case 0:{
-			FLAGS.setFLAGS(AX.getAH());
+			FLAGS.setFLAGS(AX.getAX());
 			break;
 		}
 		}

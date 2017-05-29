@@ -15,7 +15,7 @@ public class ROL extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -41,25 +41,19 @@ public class ROL extends Execution {
 			}
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-					if (W) {
-						LongALU.rol16(a2, cl, RM.equals("000"));
-					} else {
-						LongALU.rol16(a2, cl, RM.equals("000"));
-					}
-					RegisterMgr.setDATA(RM, W, a2);
-				} catch (Exception e) {
+				a2 = RegisterMgr.getDATA(RM, W);
+				if (W) {
+					LongALU.rol16(a2, cl, RM.equals("000"));
+				} else {
+					LongALU.rol8(a2, cl, RM.equals("000"));
 				}
+				RegisterMgr.setDATA(RM, W, a2);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
-				try {
-					if (W) {
-						LongALU.rol16(a2, cl, false);
-					} else {
-						LongALU.rol16(a2, cl, false);
-					}
-				} catch (Exception e) {
+				if (W) {
+					LongALU.rol16(a2, cl, false);
+				} else {
+					LongALU.rol8(a2, cl, false);
 				}
 				Memoryer.write(addr, env.getDATA(), a2, W);
 			}

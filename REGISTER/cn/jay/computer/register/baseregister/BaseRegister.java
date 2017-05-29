@@ -24,7 +24,7 @@ public abstract class BaseRegister {
 		if (data == null || data.length != size) {
 			throw new CopyArrayException(Arrays.toString(data));
 		}
-		for (int i = DATA.length - 1; i >= 0; i--) {
+		for (int i = DATA.length - 1; i >= DATA.length / 2; i--) {
 			DATA[i] = data[i - size];
 		}
 	}

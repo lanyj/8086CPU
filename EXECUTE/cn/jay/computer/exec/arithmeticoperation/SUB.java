@@ -15,7 +15,7 @@ public class SUB extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -37,37 +37,29 @@ public class SUB extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				a1 = RegisterMgr.getDATA(REG, W);
-			} catch (Exception e1) {
-			}
+			a1 = RegisterMgr.getDATA(REG, W);
 
 			if (D) {
-				try {
-					if (W) {
-						LongALU.sub16(a1, a2);
-					} else {
-						LongALU.sub8(a1, a2);
-					}
-					RegisterMgr.setDATA(REG, W, a1);
-				} catch (Exception e) {
+				if (W) {
+					LongALU.sub16(a1, a2);
+				} else {
+					LongALU.sub8(a1, a2);
 				}
+				RegisterMgr.setDATA(REG, W, a1);
 			} else {
-				try {
-					if (W) {
-						LongALU.sub16(a2, a1);
-					} else {
-						LongALU.sub8(a2, a1);
-					}
+				if (W) {
+					LongALU.sub16(a2, a1);
+				} else {
+					LongALU.sub8(a2, a1);
+				}
+				if(addr == null) {
+					RegisterMgr.setDATA(RM, W, a2);
+				} else{
 					Memoryer.write(addr, env.getDATA(), a2, W);
-				} catch (Exception e) {
 				}
 			}
 
@@ -89,32 +81,23 @@ public class SUB extends Execution {
 			byte[] a2 = null;
 
 			if (addr == null) {
-				try {
-					a1 = RegisterMgr.getDATA(RM, W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.sub16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						LongALU.sub8(a1, a2);
-					}
-				} catch (Exception e1) {
+				a1 = RegisterMgr.getDATA(RM, W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					LongALU.sub16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					LongALU.sub8(a1, a2);
 				}
-				try {
-					RegisterMgr.setDATA(RM, W, a1);
-				} catch (Exception e) {
-				}
+				RegisterMgr.setDATA(RM, W, a1);
 			} else {
-				try {
-					a1 = Memoryer.read(addr, env.getDATA(), W);
-					if (W) {
-						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.sub16(a1, a2);
-					} else {
-						a2 = BIU.getInstruction();
-						LongALU.sub8(a1, a2);
-					}
-				} catch (Exception e1) {
+				a1 = Memoryer.read(addr, env.getDATA(), W);
+				if (W) {
+					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+					LongALU.sub16(a1, a2);
+				} else {
+					a2 = BIU.getInstruction();
+					LongALU.sub8(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -126,19 +109,16 @@ public class SUB extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 
-			try {
-				if (W) {
-					a1 = AX.getAX();
-					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.sub16(a1, a2);
-					AX.setAX(a1);
-				} else {
-					a1 = AX.getAL();
-					a2 = BIU.getInstruction();
-					LongALU.sub8(a1, a2);
-					AX.setAL(a1);
-				}
-			} catch (Exception e1) {
+			if (W) {
+				a1 = AX.getAX();
+				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
+				LongALU.sub16(a1, a2);
+				AX.setAX(a1);
+			} else {
+				a1 = AX.getAL();
+				a2 = BIU.getInstruction();
+				LongALU.sub8(a1, a2);
+				AX.setAL(a1);
 			}
 			break;
 		}

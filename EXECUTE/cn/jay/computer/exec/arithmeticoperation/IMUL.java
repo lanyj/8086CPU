@@ -16,7 +16,7 @@ public class IMUL extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -36,28 +36,22 @@ public class IMUL extends Execution {
 			byte[] a1 = null;
 			byte[] a2 = null;
 			if (addr == null) {
-				try {
-					a2 = RegisterMgr.getDATA(RM, W);
-				} catch (Exception e) {
-				}
+				a2 = RegisterMgr.getDATA(RM, W);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
-			try {
-				if (W) {
-					a1 = AX.getAX();
-					a1 = LongALU.imulti16(a1, a2);
-					byte[] high = new byte[16];
-					byte[] low = new byte[16];
-					arraySplit(high, low, a1);
-					AX.setAX(low);
-					DX.setDX(high);
-				} else {
-					a1 = AX.getAL();
-					a1 = LongALU.imulti8(a1, a2);
-					AX.setAX(a1);
-				}
-			} catch (Exception e1) {
+			if (W) {
+				a1 = AX.getAX();
+				a1 = LongALU.imulti16(a1, a2);
+				byte[] high = new byte[16];
+				byte[] low = new byte[16];
+				arraySplit(high, low, a1);
+				AX.setAX(low);
+				DX.setDX(high);
+			} else {
+				a1 = AX.getAL();
+				a1 = LongALU.imulti8(a1, a2);
+				AX.setAX(a1);
 			}
 			break;
 		}
