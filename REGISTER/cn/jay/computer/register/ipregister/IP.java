@@ -14,6 +14,8 @@ public class IP {
 	}
 	
 	public final static void setIP(long value) {
+		System.out.println("IP = " + IP + " -> " + value);
+
 		IP = value;
 	}
 	

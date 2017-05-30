@@ -1,7 +1,5 @@
 package cn.jay.computer.exec.controltransferoperation;
 
-import java.util.Arrays;
-
 import cn.jay.computer.biu.BIU;
 import cn.jay.computer.eu.Environment;
 import cn.jay.computer.exec.Execution;
@@ -27,10 +25,6 @@ public class CALL extends Execution {
 
 	public void exec() throws Exception {
 		int conn = getIndex();
-		
-		System.out.println( "\nCALL - - - " + Arrays.toString(CS.getCS()) + ":" + IP.getIPLongValue());
-//		System.out.println(this);
-		
 		switch (conn) {
 		case -1: {
 			break;

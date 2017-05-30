@@ -6,7 +6,7 @@
 	</segmentoverride>
 	<datatransferoperation>
 		<category name="MOV">
-			<subcategory opcode="100010**" operand="(D)(W)(MOD)(REG)(R/M)">MOV reg/mem to/from reg</subcategory>
+			<subcategory opcode="100010**********" operand="(D)(W)(MOD)(REG)(R/M)">MOV reg/mem to/from reg</subcategory>
 			<subcategory opcode="1100011***000***" operand="(W)(MOD)(R/M)">MOV immed to reg/mem</subcategory>
 			<subcategory opcode="1011****" operand="(W)(REG)">MOV immed to reg</subcategory>
 			<subcategory opcode="101000**" operand="(D)(W)">MOV direct mem to/from acc</subcategory>
@@ -23,7 +23,7 @@
 			<subcategory opcode="000**111" operand="(SEG)">pop seg</subcategory>
 		</category>
 		<category name="XCHG">
-			<subcategory opcode="1000011*" operand="(W)(MOD)(REG)(R/M)">exchange reg/mem with reg</subcategory>
+			<subcategory opcode="1000011*********" operand="(W)(MOD)(REG)(R/M)">exchange reg/mem with reg</subcategory>
 			<subcategory opcode="10010***" operand="(REG)">exchange reg with acc</subcategory>
 		</category>
 		<category name="IN">

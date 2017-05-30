@@ -25,11 +25,11 @@ public class LOOPZ extends Execution {
 			break;
 		}
 		case 0: {
+			CX._CX.dec();
+			byte[] ip = BIU.getInstruction();
 			if(CX._CX.isZero() || !FLAGS.getFLAGS(FLAGS.ZF)) {
 				return;
 			}
-			CX._CX.dec();
-			byte[] ip = BIU.getInstruction();
 			IP.setIP(IP.getIPLongValue() + byteArrayToLong(ip, true, 8));
 			break;
 		}

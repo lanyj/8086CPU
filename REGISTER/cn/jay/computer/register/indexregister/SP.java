@@ -36,7 +36,8 @@ public class SP extends BaseRegister {
 		long b = MathUtils.byteArrayToLong(src, false, 16);
 		byte[] ret = MathUtils.longToByteArray(a + b, false, 16);
 
-		return ret;
+		MathUtils.copyArray(des, ret);
+		return des;
 	}
 	
 	public static byte[] sub(byte[] des, byte[] src) {
@@ -44,6 +45,8 @@ public class SP extends BaseRegister {
 		long b = MathUtils.byteArrayToLong(src, false, 16);
 		byte[] ret = MathUtils.longToByteArray(a - b, false, 16);
 
-		return ret;
+		MathUtils.copyArray(des, ret);
+		return des;
 	}
+	
 }

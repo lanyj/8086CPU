@@ -1,7 +1,5 @@
 package cn.jay.computer.exec.controltransferoperation;
 
-import java.util.Arrays;
-
 import cn.jay.computer.biu.BIU;
 import cn.jay.computer.exec.Execution;
 import cn.jay.computer.exec.datatransferoperation.POP;
@@ -22,9 +20,6 @@ public class RET extends Execution {
 	}
 
 	public void exec() throws Exception {
-		
-		System.out.println( "\nRET - - - " + Arrays.toString(CS.getCS()) + ":" + IP.getIPLongValue());
-//		System.out.println(this);
 		
 		int conn = getIndex();
 		switch (conn) {

@@ -24,10 +24,12 @@ public class JCXZ extends Execution {
 			break;
 		}
 		case 0: {
+			byte[] ip = BIU.getInstruction();
+			
 			if(CX._CX.isZero()) {
 				return;
 			}
-			byte[] ip = BIU.getInstruction();
+			
 			IP.setIP(IP.getIPLongValue() + byteArrayToLong(ip, true, 8));
 			break;
 		}

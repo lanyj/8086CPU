@@ -27,10 +27,10 @@ public class ComputerLanucher {
 		MemoryManager mm = Configer.getMeomryManager();
 		try {
 			CS.setCS(new byte[16]);
-			IP.setIP(0);
+			IP.setIP(2 * 256);
 		} catch (CopyArrayException e) {
 		}
-		mm.test(System.getProperty("user.dir") + "/Dos6.22-5.25.img");
+		mm.test(System.getProperty("user.dir") + "/COMPUT~1.EXE");
 		
 		start();
 	}

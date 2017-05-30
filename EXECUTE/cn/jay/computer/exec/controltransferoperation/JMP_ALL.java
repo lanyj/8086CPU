@@ -23,12 +23,14 @@ public class JMP_ALL extends Execution {
 			break;
 		}
 		case 0: {
+			byte[] ip = BIU.getInstruction();
+			
 			String index = getOperand("D") + getOperand("REG");
 			boolean p = JMP_Analyzer.canJmp(index);
 			if(!p) {
 				return;
 			}
-			byte[] ip = BIU.getInstruction();
+			
 			IP.setIP(IP.getIPLongValue() + byteArrayToLong(ip, true, 8));
 			break;
 		}
