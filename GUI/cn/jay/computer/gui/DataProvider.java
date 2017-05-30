@@ -1,6 +1,5 @@
 package cn.jay.computer.gui;
 
-import cfg.Configer;
 import cn.jay.computer.memory.MemoryManager;
 import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.dataregister.AX;
@@ -17,6 +16,7 @@ import cn.jay.computer.register.segmentregister.CS;
 import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.register.segmentregister.ES;
 import cn.jay.computer.register.segmentregister.SS;
+import cn.jay.modelprovider.Provider;
 
 public class DataProvider {
 	public static final BaseRegister getRegister(String name) {
@@ -78,7 +78,7 @@ public class DataProvider {
 	}
 	public static final String getMemString(long addr, long size) {
 		StringBuffer sb = new StringBuffer();
-		MemoryManager mm = Configer.getMeomryManager();
+		MemoryManager mm = Provider.getMeomryManager();
 		for(int i = 0;i < size;i++) {
 			byte[] value = mm.read(addr++);
 			sb.append(getString(value));

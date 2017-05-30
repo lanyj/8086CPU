@@ -40,16 +40,4 @@ public class BIU {
 		return low;
 	}
 	
-//	private static final long generateIPAddress() {
-//		long address = 0;
-//		long _cs = 0;
-//		long _ip = IP.getIPLongValue();
-//		byte[] cs = CS.getCS();
-//		for(int i = 0;i < cs.length;i++) {
-//			_cs |= cs[i] << i;
-//		}
-//		address = _cs * Configer.getInstructionLength() + _ip;
-//		return address;
-//	}
-	
 }

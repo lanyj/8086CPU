@@ -13,6 +13,7 @@
 	<classpathentry kind="src" path="TCP"/>
 	<classpathentry kind="src" path="CLK"/>
 	<classpathentry kind="src" path="GUI"/>
+	<classpathentry kind="src" path="ModelProvider"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jsoup"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>

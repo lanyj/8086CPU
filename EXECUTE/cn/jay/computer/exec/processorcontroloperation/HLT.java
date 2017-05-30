@@ -14,7 +14,7 @@ public class HLT extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
@@ -22,8 +22,9 @@ public class HLT extends Execution {
 		}
 		case 0: {
 			//TODO
-			System.out.println("Halt");
-			break;
+			System.out.println("Halt process.");
+			
+			System.exit(0);
 		}
 		}
 	}

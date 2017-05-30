@@ -23,7 +23,7 @@ public class MemoryManager extends Client implements IOInterface {
 			memory.write(i, (byte) b);
 			b = is.read();
 		}
-		System.out.println(i);
+		System.out.println("Memory Size = " + i + " bytes.");
 		is.close();
 	}
 	
@@ -50,7 +50,4 @@ public class MemoryManager extends Client implements IOInterface {
 		//TODO
 	}
 	
-	public static void main(String[] args) throws Exception {
-		new MemoryManager(102400).test(System.getProperty("user.dir") + "/Dos6.22-5.25.img");
-	}
 }

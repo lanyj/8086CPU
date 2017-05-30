@@ -7,14 +7,18 @@ public class IP {
 	public static int INSTRUCTION_LENGTH = Configer.getInstructionLength();
 	
 	public final static void setIP(byte[] data) {
+		long old = IP;
+		
 		IP = 0;
 		for(int i = 0;i < data.length;i++) {
 			IP |= data[i] << i;
 		}
+		
+		System.out.println("\nSet IP = " + old + " -> " + IP + "\n");
 	}
 	
 	public final static void setIP(long value) {
-		System.out.println("IP = " + IP + " -> " + value);
+		System.out.println("\nSet IP = " + IP + " -> " + value + "\n");
 
 		IP = value;
 	}

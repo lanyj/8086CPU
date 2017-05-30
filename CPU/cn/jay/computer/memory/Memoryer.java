@@ -1,30 +1,21 @@
 package cn.jay.computer.memory;
 
-import cfg.Configer;
 import cn.jay.computer.alu.MathUtils;
+import cn.jay.modelprovider.Provider;
 
 public class Memoryer {
 
-	// dev.csdn.net/article/2/2300.shtm CISC
-	/*
-	 * 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 
-	 * 0 1 2 3 4 5 6 7 8 9  A  B  C  D  E  F
-	 * 8A8F 3412 -> MOV CL,[BX+1234H] C787 0021 50FA -> MOV [BX+2100H],0FA50H
-	 * 1100 0111 1000 0111 0000 0000 0010 0001 0101 0000 1111 1010 0101 0000
-	 * 8ED8 -> MOV DS,AX
-	 */
-
+	private static final MemoryManager mm = Provider.getMeomryManager();
+	
 	public static final byte[] read(long address, boolean W) {
 		if(W) {
-			MemoryManager mm = Configer.getMeomryManager();
 			return arrayConcat(mm.read(address), mm.read(address + 1));
 		} else {
-			return Configer.getMeomryManager().read(address);
+			return Provider.getMeomryManager().read(address);
 		}
 	}
 
 	public static final boolean write(long address, byte[] value, boolean W) {
-		MemoryManager mm = Configer.getMeomryManager();
 		if(W) {
 			byte[] low = new byte[8];
 			byte[] high = new byte[8];

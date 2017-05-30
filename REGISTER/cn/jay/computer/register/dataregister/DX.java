@@ -8,7 +8,9 @@ import cn.jay.computer.utilexception.CopyArrayException;
 public class DX extends BaseRegister {
 	public final static DX _DX = new DX();
 	public static final void setDX(byte[] data) throws CopyArrayException {
-		System.out.println("\nSetDX = " + Arrays.toString(data) + "\n");
+		
+		System.out.println("\nSet DX = " + Arrays.toString(data) + "\n");
+		
 		_DX.setDATA(data);
 	}
 	public static final byte[] getDX() {
