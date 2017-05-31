@@ -15,16 +15,27 @@ import cn.jay.modelprovider.Provider;
 public class ComputerLanucher {
 	static {
 		try{
+			Class.forName("cn.jay.io_bridge.IOBridge");
 			Class.forName("cn.jay.computer.port.PortMgr");
+			
 			Class.forName("cn.jay.computer.eu.EU");
 			Class.forName("cn.jay.computer.eu.Environment");
+
 			Class.forName("cfg.Configer");
 			Class.forName("cn.jay.modelprovider.Provider");
 			
 			Class.forName("cn.jay.computer.exec.ExecuterMgr");
-			Class.forName("cn.jay.computer.alu.LongALU");
+			Class.forName("cn.jay.computer.exec.RM_MOD_Analyzer");
 			
-			Class.forName("");
+			Class.forName("cn.jay.computer.alu.MathUtils");
+			Class.forName("cn.jay.computer.alu.LongALU");
+			Class.forName("cn.jay.computer.arrayutils.Utils");
+			
+			Class.forName("cn.jay.computer.biu.BIU");
+			
+			Class.forName("cn.jay.computer.register.baseregister.RegisterMgr");
+			Class.forName("cn.jay.computer.register.flagregister.FLAGS");
+			Class.forName("cn.jay.computer.register.ipregister.IP");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(-1);
