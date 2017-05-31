@@ -1,7 +1,5 @@
 package cn.jay.computer.register.dataregister;
 
-import java.util.Arrays;
-
 import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.utilexception.CopyArrayException;
 
@@ -9,7 +7,7 @@ public class DX extends BaseRegister {
 	public final static DX _DX = new DX();
 	public static final void setDX(byte[] data) throws CopyArrayException {
 		
-		System.out.println("Set DX = " + Arrays.toString(data));
+//		System.out.println("Set DX = " + Arrays.toString(data));
 		
 		_DX.setDATA(data);
 	}

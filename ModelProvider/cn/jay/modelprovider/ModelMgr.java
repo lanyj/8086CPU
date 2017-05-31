@@ -4,13 +4,13 @@ import java.util.HashMap;
 
 import cfg.Configer;
 import cn.jay.computer.clk.CLK;
-import cn.jay.computer.memory.MemoryManager;
+import cn.jay.computer.tcp.Client;
 
-public class Provider {
+public class ModelMgr {
+	public static final HashMap<String, Client> IO_MODELS = new HashMap<>();
+	
 	public static final HashMap<Integer, CLK> CLK_POOL = new HashMap<>();
 	
-	public static final MemoryManager MEMORY_MANAGER = new MemoryManager(0xfffffff);
-
 	/**
 	 * 
 	 * @param mul
@@ -28,7 +28,13 @@ public class Provider {
 		return CLK_POOL.get(mills);
 	}
 	
-	public static final MemoryManager getMeomryManager() {
-		return MEMORY_MANAGER;
+	public static final boolean addIO_Model(Client ioModel) {
+		System.out.println(ioModel.getModelName() + " - - - - " + ioModel + " - - -- - " + IO_MODELS);
+		return IO_MODELS.put(ioModel.getModelName(), ioModel) != null;
 	}
+	
+	public static final Client getIOModel(String modelName) {
+		return IO_MODELS.get(modelName);
+	}
+	
 }

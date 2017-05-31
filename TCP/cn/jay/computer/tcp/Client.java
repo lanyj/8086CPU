@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Date;
 
 import cfg.Configer;
+import cn.jay.modelprovider.ModelMgr;
 
 public abstract class Client extends Thread {
 	protected Socket socket = null;
@@ -14,8 +16,10 @@ public abstract class Client extends Thread {
 
 	protected boolean alive = true;
 	protected final byte[] BUFFER = new byte[Configer.getCPUPortCount() * 2];
+	protected String modelName = new Date().toString();
 	
-	public Client() {
+	public Client(String modelName) {
+		this.modelName = modelName;
 		try {
 			init();
 		} catch (Exception e) {
@@ -23,12 +27,22 @@ public abstract class Client extends Thread {
 		}
 	}
 
+	public boolean deploy() {
+		this.start();
+		
+		return ModelMgr.addIO_Model(this);
+	}
+	
 	private void init() throws Exception {
 		socket = new Socket(Configer.getCPUConnectHost(), Configer.getCPUConnectPort());
 		out = socket.getOutputStream();
 		in = socket.getInputStream();
 	}
 
+	public String getModelName() {
+		return modelName;
+	}
+	
 	@Override
 	public final void run() {
 		while (alive) {
@@ -43,7 +57,8 @@ public abstract class Client extends Thread {
 		try {
 			in.read(BUFFER);
 		} catch (IOException e) {
-			e.printStackTrace();
+			if(alive)
+				e.printStackTrace();
 		}
 	}
 	
@@ -52,11 +67,12 @@ public abstract class Client extends Thread {
 			out.write(BUFFER, 0, BUFFER.length);
 			out.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			if(alive)
+				e.printStackTrace();
 		}
 	}
 	
-	protected final void destory() {
+	public final void close() {
 		alive = false;
 		if (socket != null) {
 			try {

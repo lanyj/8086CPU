@@ -16,7 +16,7 @@ import cn.jay.computer.register.segmentregister.CS;
 import cn.jay.computer.register.segmentregister.DS;
 import cn.jay.computer.register.segmentregister.ES;
 import cn.jay.computer.register.segmentregister.SS;
-import cn.jay.modelprovider.Provider;
+import cn.jay.modelprovider.ModelMgr;
 
 public class DataProvider {
 	public static final BaseRegister getRegister(String name) {
@@ -78,7 +78,7 @@ public class DataProvider {
 	}
 	public static final String getMemString(long addr, long size) {
 		StringBuffer sb = new StringBuffer();
-		MemoryManager mm = Provider.getMeomryManager();
+		MemoryManager mm = (MemoryManager) ModelMgr.getIOModel("MAIN_MEMORY");
 		for(int i = 0;i < size;i++) {
 			byte[] value = mm.read(addr++);
 			sb.append(getString(value));

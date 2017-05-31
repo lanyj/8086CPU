@@ -109,7 +109,7 @@ public class Execution {
 	}
 	
 	public String getDescrible() {
-		return describle;
+		return this.getClass().getSimpleName() + "\t" + describle;
 	}
 	
 	public int getIndex() {
@@ -121,7 +121,7 @@ public class Execution {
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(this.getClass() + "\t" + opcode + " + " + operand + " -> " + describle + "\n");
+		sb.append(this.getClass().getSimpleName() + "\t" + opcode + " + " + operand + " -> " + describle + "\n");
 
 		sb.append(Arrays.toString(operandName.toArray(new String[]{})) + "\n");
 		sb.append(Arrays.toString(operandValue.toArray(new String[]{})));

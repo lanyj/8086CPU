@@ -27,6 +27,8 @@ public class JMP_ALL extends Execution {
 			
 			String index = getOperand("D") + getOperand("REG");
 			boolean p = JMP_Analyzer.canJmp(index);
+			
+			System.out.println("jmp_all_test" + index + " - " + p);
 			if(!p) {
 				return;
 			}

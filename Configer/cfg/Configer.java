@@ -14,7 +14,7 @@ public class Configer {
 		return "127.0.0.1";
 	}
 	public static final int getCPUConnectPort() {
-		return 8000;
+		return 8956;
 	}
 	public static final int getCPUPortCount() {
 		return 40;

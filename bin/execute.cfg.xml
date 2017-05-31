@@ -97,7 +97,7 @@
 		<category name="NEG">
 			<subcategory opcode="1111011***011***" operand="(W)(MOD)(R/M)">change sign</subcategory>
 		</category>
-		<category name="SUB">
+		<category name="CMP">
 			<subcategory opcode="001110**********" operand="(D)(W)(MOD)(REG)(R/M)">cmp reg/mem with reg</subcategory>
 			<subcategory opcode="100000****111***" operand="(D)(W)(MOD)(R/M)">cmp imme with reg/mem</subcategory>
 			<subcategory opcode="0011110*" operand="(W)">cmp imme with acc</subcategory>
@@ -165,19 +165,19 @@
 			<subcategory opcode="0010010*" operand="(W)">and imme with acc</subcategory>
 		</category>
 		<category name="TEST">
-			<subcategory opcode="1000010*********" operand="(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
-			<subcategory opcode="1111011***000***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
-			<subcategory opcode="1010100*" operand="(W)">imme with acc</subcategory>
+			<subcategory opcode="1000010*********" operand="(W)(MOD)(REG)(R/M)">test reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1111011***000***" operand="(W)(MOD)(R/M)">test imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="1010100*" operand="(W)">test imme with acc</subcategory>
 		</category>
 		<category name="OR">
-			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
-			<subcategory opcode="1000000***001***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
-			<subcategory opcode="0000110*" operand="(W)">imme with acc</subcategory>
+			<subcategory opcode="000010**********" operand="(D)(W)(MOD)(REG)(R/M)">or reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***001***" operand="(W)(MOD)(R/M)">or imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0000110*" operand="(W)">or imme with acc</subcategory>
 		</category>
 		<category name="XOR">
-			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(REG)(R/M)">reg/mem with reg/mem to either</subcategory>
-			<subcategory opcode="1000000***110***" operand="(W)(MOD)(R/M)">imme with reg/mem to reg/mem</subcategory>
-			<subcategory opcode="0011010*" operand="(W)">imme with acc</subcategory>
+			<subcategory opcode="001100**********" operand="(D)(W)(MOD)(REG)(R/M)">xor reg/mem with reg/mem to either</subcategory>
+			<subcategory opcode="1000000***110***" operand="(W)(MOD)(R/M)">xor imme with reg/mem to reg/mem</subcategory>
+			<subcategory opcode="0011010*" operand="(W)">xor imme with acc</subcategory>
 		</category>
 	</logicaloperation>
 	<stringmanipulationoperation>
@@ -202,20 +202,20 @@
 	</stringmanipulationoperation>
 	<controltransferoperation>
 		<category name="CALL">
-			<subcategory opcode="11101000" operand="">direct within segment</subcategory>
-			<subcategory opcode="11111111**010***" operand="(MOD)(R/M)">indirect within segment</subcategory>
-			<subcategory opcode="10011010" operand="">direct intersegment</subcategory>
-			<subcategory opcode="11111111**011***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+			<subcategory opcode="11101000" operand="">call direct within segment</subcategory>
+			<subcategory opcode="11111111**010***" operand="(MOD)(R/M)">call indirect within segment</subcategory>
+			<subcategory opcode="10011010" operand="">call direct intersegment</subcategory>
+			<subcategory opcode="11111111**011***" operand="(MOD)(R/M)">call indirect intersegment</subcategory>
 		</category>
 		<category name="JMP">
-			<subcategory opcode="111010*1" operand="(W)">direct within segment</subcategory>
-			<subcategory opcode="11111111**100***" operand="(MOD)(R/M)">indirect within segment</subcategory>
-			<subcategory opcode="11101010" operand="">direct intersegment</subcategory>
-			<subcategory opcode="11111111**101***" operand="(MOD)(R/M)">indirect intersegment</subcategory>
+			<subcategory opcode="111010*1" operand="(W)">jmp direct within segment</subcategory>
+			<subcategory opcode="11111111**100***" operand="(MOD)(R/M)">jmp indirect within segment</subcategory>
+			<subcategory opcode="11101010" operand="">jmp direct intersegment</subcategory>
+			<subcategory opcode="11111111**101***" operand="(MOD)(R/M)">jmp indirect intersegment</subcategory>
 		</category>
 		<category name="RET">
-			<subcategory opcode="1100001*" operand="(W)">within segment (adding imme to SP)</subcategory>
-			<subcategory opcode="1100101*" operand="(W)">intersegment (adding imme to SP)</subcategory>
+			<subcategory opcode="1100001*" operand="(W)">ret within segment (adding imme to SP)</subcategory>
+			<subcategory opcode="1100101*" operand="(W)">ret intersegment (adding imme to SP)</subcategory>
 		</category>
 		<category name="JMP_ALL">
 			<subcategory opcode="0111****" operand="(D)(REG)">jump with con</subcategory>

@@ -1,5 +1,6 @@
 package cn.jay.computer.exec.processorcontroloperation;
 
+import cn.jay.computer.ComputerEnder;
 import cn.jay.computer.exec.Execution;
 
 public class HLT extends Execution {
@@ -24,7 +25,8 @@ public class HLT extends Execution {
 			//TODO
 			System.out.println("Halt process.");
 			
-			System.exit(0);
+			ComputerEnder.end();
+//			System.exit(0);
 		}
 		}
 	}

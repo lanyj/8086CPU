@@ -20,8 +20,12 @@ public class CLK extends Thread {
 	}
 	
 	public void open() {
-		alive = true;
-		run();
+		if(!alive) {
+			alive = true;
+			this.start();
+		} else {
+			return;
+		}
 	}
 	
 	public void close() {
@@ -30,6 +34,9 @@ public class CLK extends Thread {
 	
 	public void run() {
 		while(alive) {
+			for(TimerTask t : tasks) {
+				new Thread(t).start();
+			}
 			try {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
@@ -38,9 +45,6 @@ public class CLK extends Thread {
 				if(!COUNTER.isZero()) {
 					continue;
 				}
-			}
-			for(TimerTask t : tasks) {
-				new Thread(t).start();
 			}
 		}
 	}

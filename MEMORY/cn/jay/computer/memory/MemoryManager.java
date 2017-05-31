@@ -8,12 +8,14 @@ import cn.jay.computer.io_interface.IOInterface;
 import cn.jay.computer.tcp.Client;
 
 public class MemoryManager extends Client implements IOInterface {
+	
+
 	Memory memory = null;
 	
-	public MemoryManager(long size) {
+	public MemoryManager(String modelName, long size) {
+		super(modelName);
 		memory = new Memory(size);
 	}
-	
 	
 	public void test(String path) throws Exception {
 		InputStream is = new FileInputStream(new File(path));

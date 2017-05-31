@@ -13,28 +13,44 @@ import cn.jay.computer.utilexception.CopyArrayException;
 public class Server extends Thread {
 	ArrayList<ServerThread> serverThreads = new ArrayList<ServerThread>();
 	ServerSocket server = null;
-
+	boolean alive = true;
+	
 	public Server() throws Exception {
 		init();
 	}
 
 	private void init() throws Exception {
 		server = new ServerSocket(Configer.getCPUConnectPort());
+		this.alive = true;
+		
 		this.start();
+	}
+	
+	
+	public void close() {
+		this.alive = false;
+		try {
+			server.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(ServerThread st : serverThreads) {
+			st.close();
+		}
 	}
 
 	@Override
 	public void run() {
 		Socket client = null;
 		try {
-			boolean alive = true;
 			while (alive) {
 				client = server.accept();
 				serverThreads.add(new ServerThread(client));
 			}
-			server.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			if(alive)
+				e.printStackTrace();
 		}
 	}
 
@@ -78,6 +94,8 @@ class ServerThread extends Thread {
 	private void init() throws Exception {
 		out = socket.getOutputStream();
 		in = socket.getInputStream();
+		
+		this.start();
 	}
 
 	@Override
@@ -86,6 +104,10 @@ class ServerThread extends Thread {
 			receive();
 			doJob();
 		}
+	}
+	
+	public void close() {
+		alive = false;
 	}
 
 	public static final void doJob() {

@@ -10,7 +10,7 @@ import cn.jay.computer.memory.MemoryManager;
 import cn.jay.computer.register.ipregister.IP;
 import cn.jay.computer.register.segmentregister.CS;
 import cn.jay.computer.utilexception.CopyArrayException;
-import cn.jay.modelprovider.Provider;
+import cn.jay.modelprovider.ModelMgr;
 
 public class ComputerLanucher {
 	static {
@@ -22,7 +22,7 @@ public class ComputerLanucher {
 			Class.forName("cn.jay.computer.eu.Environment");
 
 			Class.forName("cfg.Configer");
-			Class.forName("cn.jay.modelprovider.Provider");
+			Class.forName("cn.jay.modelprovider.ModelMgr");
 			
 			Class.forName("cn.jay.computer.exec.ExecuterMgr");
 			Class.forName("cn.jay.computer.exec.RM_MOD_Analyzer");
@@ -40,12 +40,14 @@ public class ComputerLanucher {
 			e.printStackTrace();
 			System.exit(-1);
 		}
+		
+		new MemoryManager("MAIN_MEMORY", 0x00ffffff).deploy();
 	}
 	
 	public static void start() {
-		Provider.getCLK(1).registerTask(EU.JOB);
+		ModelMgr.getCLK(1).registerTask(EU.JOB);
 
-		Set<Entry<Integer, CLK>> clk = Provider.CLK_POOL.entrySet();
+		Set<Entry<Integer, CLK>> clk = ModelMgr.CLK_POOL.entrySet();
 		for (Iterator<Entry<Integer, CLK>> itr = clk.iterator(); itr.hasNext();) {
 			itr.next().getValue().open();
 		}
@@ -53,7 +55,8 @@ public class ComputerLanucher {
 	
 	
 	public static void main(String[] args) throws Exception {
-		MemoryManager mm = Provider.getMeomryManager();
+		MemoryManager mm = (MemoryManager) ModelMgr.getIOModel("MAIN_MEMORY");
+		
 		try {
 			CS.setCS(new byte[16]);
 			IP.setIP(2 * 256);

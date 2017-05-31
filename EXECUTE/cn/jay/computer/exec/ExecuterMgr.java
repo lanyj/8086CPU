@@ -226,6 +226,7 @@ public class ExecuterMgr implements Serializable {
 			for (Execution e : abstractExecuters) {
 				try {
 					if (e.match(s1, s2)) {
+						System.out.println("\n" + e.getDescrible() + "\n");
 						e.exec();
 					}
 				} catch (Exception e1) {

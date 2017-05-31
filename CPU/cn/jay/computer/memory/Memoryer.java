@@ -1,17 +1,17 @@
 package cn.jay.computer.memory;
 
 import cn.jay.computer.alu.MathUtils;
-import cn.jay.modelprovider.Provider;
+import cn.jay.modelprovider.ModelMgr;
 
 public class Memoryer {
 
-	private static final MemoryManager mm = Provider.getMeomryManager();
+	private static final MemoryManager mm = (MemoryManager) ModelMgr.getIOModel("MAIN_MEMORY");
 	
 	public static final byte[] read(long address, boolean W) {
 		if(W) {
 			return arrayConcat(mm.read(address), mm.read(address + 1));
 		} else {
-			return Provider.getMeomryManager().read(address);
+			return mm.read(address);
 		}
 	}
 
