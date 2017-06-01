@@ -16,7 +16,7 @@ public class POP extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public static byte[] pop() {
+	public static byte[] pop() throws Exception {
 		byte[] ret = Memoryer.read(SP.getSP(), SS.getSS(), true);
 		SP.add2();
 

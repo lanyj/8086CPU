@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="Launcher"/>
+	<classpathentry kind="src" path="LAUNCHER"/>
 	<classpathentry kind="src" path="ALU"/>
 	<classpathentry kind="src" path="MEMORY"/>
 	<classpathentry kind="src" path="EXECUTE"/>
-	<classpathentry kind="src" path="IOBRIDGE"/>
 	<classpathentry kind="src" path="REGISTER"/>
-	<classpathentry kind="src" path="Configer"/>
-	<classpathentry kind="src" path="Utils"/>
-	<classpathentry kind="src" path="Exception"/>
+	<classpathentry kind="src" path="CONFIGER"/>
+	<classpathentry kind="src" path="UTILS"/>
 	<classpathentry kind="src" path="CPU"/>
 	<classpathentry kind="src" path="TCP"/>
 	<classpathentry kind="src" path="CLK"/>

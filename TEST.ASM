@@ -11,6 +11,19 @@ START:
 
     HLT
 
+    SHOW PROC
+    	PUSH DX
+    	PUSH AX
+    	MOV AX,AX
+    	
+        MOV DX,0FFFFH
+        OUT DX,AL
+        
+        POP AX
+        POP DX
+        RET
+    ENDP
+
     FARB PROC
     	PUSH AX
     	PUSH BX
@@ -25,11 +38,13 @@ START:
     	PUSH AX
     	
     	MOV DX,AX
+    	CALL SHOW
     REP_S:
     	POP AX
     	POP BX
 
     	MOV DX,AX
+    	CALL SHOW
 
         ADD AX,BX
         

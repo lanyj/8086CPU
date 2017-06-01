@@ -1,8 +1,8 @@
 package cn.jay.computer.register.indexregister;
 
 import cn.jay.computer.alu.MathUtils;
+import cn.jay.computer.arrayutils.CopyArrayException;
 import cn.jay.computer.register.baseregister.BaseRegister;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class SP extends BaseRegister {
 	public static final SP _SP = new SP();

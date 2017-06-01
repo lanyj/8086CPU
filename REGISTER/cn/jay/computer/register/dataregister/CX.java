@@ -1,7 +1,7 @@
 package cn.jay.computer.register.dataregister;
 
+import cn.jay.computer.arrayutils.CopyArrayException;
 import cn.jay.computer.register.baseregister.BaseRegister;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class CX extends BaseRegister {
 	public final static CX _CX = new CX();

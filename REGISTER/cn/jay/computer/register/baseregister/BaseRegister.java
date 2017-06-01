@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import cfg.Configer;
 import cn.jay.computer.alu.MathUtils;
+import cn.jay.computer.arrayutils.CopyArrayException;
 import cn.jay.computer.arrayutils.Utils;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public abstract class BaseRegister {
 	private final byte[] DATA = new byte[Configer.getRegisterSize()];

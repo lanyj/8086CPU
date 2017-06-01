@@ -1,9 +1,9 @@
 package cn.jay.computer.exec.datatransferoperation;
 
+import cn.jay.computer.arrayutils.CopyArrayException;
 import cn.jay.computer.exec.Execution;
 import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.flagregister.FLAGS;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class LAHF extends Execution {
 

@@ -1,8 +1,6 @@
 package cn.jay.computer.arrayutils;
 import java.util.Arrays;
 
-import cn.jay.computer.utilexception.CopyArrayException;
-
 public class Utils {
 	public static void copyArray(byte [] des, byte [] src) throws CopyArrayException {
 		if(des == null || src == null || des.length != src.length) {

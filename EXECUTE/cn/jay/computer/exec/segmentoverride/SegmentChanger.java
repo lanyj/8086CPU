@@ -1,6 +1,8 @@
 package cn.jay.computer.exec.segmentoverride;
 
+import cn.jay.computer.biu.BIU;
 import cn.jay.computer.eu.Environment;
+import cn.jay.computer.exec.ExecuterMgr;
 import cn.jay.computer.exec.Execution;
 import cn.jay.computer.register.segmentregister.CS;
 import cn.jay.computer.register.segmentregister.DS;
@@ -13,7 +15,7 @@ public class SegmentChanger extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec(byte code) {
+	public void exec(byte code) throws Exception {
 		int conn = getIndex();
 
 		switch (conn) {
@@ -40,6 +42,7 @@ public class SegmentChanger extends Execution {
 				break;
 			}
 			}
+			ExecuterMgr.exec(BIU.getInstruction(), BIU.peekInstruction());
 		}
 		}
 	}

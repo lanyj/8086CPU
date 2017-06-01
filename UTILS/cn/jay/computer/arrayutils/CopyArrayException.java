@@ -1,4 +1,4 @@
-package cn.jay.computer.utilexception;
+package cn.jay.computer.arrayutils;
 
 public class CopyArrayException extends Exception {
 	/**

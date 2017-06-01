@@ -33,6 +33,12 @@ public abstract class Client extends Thread {
 		return ModelMgr.addIO_Model(this);
 	}
 	
+	public boolean undeploy() {
+		this.close();
+		
+		return ModelMgr.removeIO_Model(this.getModelName()) == this;
+	}
+	
 	private void init() throws Exception {
 		socket = new Socket(Configer.getCPUConnectHost(), Configer.getCPUConnectPort());
 		out = socket.getOutputStream();
@@ -72,7 +78,7 @@ public abstract class Client extends Thread {
 		}
 	}
 	
-	public final void close() {
+	private final void close() {
 		alive = false;
 		if (socket != null) {
 			try {

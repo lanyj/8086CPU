@@ -7,7 +7,7 @@ public class Memoryer {
 
 	private static final MemoryManager mm = (MemoryManager) ModelMgr.getIOModel("MAIN_MEMORY");
 	
-	public static final byte[] read(long address, boolean W) {
+	public static final byte[] read(long address, boolean W) throws Exception {
 		if(W) {
 			return arrayConcat(mm.read(address), mm.read(address + 1));
 		} else {
@@ -15,7 +15,7 @@ public class Memoryer {
 		}
 	}
 
-	public static final boolean write(long address, byte[] value, boolean W) {
+	public static final boolean write(long address, byte[] value, boolean W) throws Exception {
 		if(W) {
 			byte[] low = new byte[8];
 			byte[] high = new byte[8];
@@ -28,7 +28,7 @@ public class Memoryer {
 		return false;
 	}
 
-	public static final byte[] read(byte[] address, boolean W) {
+	public static final byte[] read(byte[] address, boolean W) throws Exception {
 		// TODO
 		byte[] ret = read(byteArrayToLong(address, 20), W);
 //		System.out.println("Read memory: addr = " + Arrays.toString(address) + ", W = " + W + ", ret = "
@@ -36,21 +36,21 @@ public class Memoryer {
 		return ret;
 	}
 
-	public static final boolean write(byte[] address, byte[] value, boolean W) {
+	public static final boolean write(byte[] address, byte[] value, boolean W) throws Exception {
 		// TODO
 //		System.out.println("Write memory: addr = " + Arrays.toString(address) + ", W = " + W + ", val = "
 //				+ Arrays.toString(value));
 		return write(byteArrayToLong(address, 20), value, W);
 	}
 
-	public static final byte[] read(byte[] index, byte[] base, boolean W) {
+	public static final byte[] read(byte[] index, byte[] base, boolean W) throws Exception {
 		byte[] address = new byte[20];
 		generateMemoryAddress(address, index, base);
 
 		return read(address, W);
 	}
 
-	public static final boolean write(byte[] index, byte[] base, byte[] value, boolean W) {
+	public static final boolean write(byte[] index, byte[] base, byte[] value, boolean W) throws Exception {
 		byte[] address = new byte[20];
 		generateMemoryAddress(address, index, base);
 

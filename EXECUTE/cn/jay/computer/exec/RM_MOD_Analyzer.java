@@ -10,7 +10,7 @@ import cn.jay.computer.register.indexregister.SI;
 import cn.jay.computer.register.segmentregister.SS;
 
 public class RM_MOD_Analyzer {
-	public static byte[] analyze(String MOD,String RM,boolean W) {
+	public static byte[] analyze(String MOD,String RM,boolean W) throws Exception {
 		byte[] ret = null;
 		if(!MOD.equals("11") && RM.equals("110") && !MOD.equals("00")) {
 			Environment.setDataSegment(SS._SS);

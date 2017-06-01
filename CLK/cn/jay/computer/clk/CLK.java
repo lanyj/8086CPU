@@ -1,72 +1,58 @@
 package cn.jay.computer.clk;
 
 import java.util.ArrayList;
-import java.util.TimerTask;
+
+import cfg.Configer;
 
 public class CLK extends Thread {
-	protected Counter COUNTER = new Counter();
+	private static long times = 0;
 	
-	private ArrayList<Job> tasks = new ArrayList<>();
-	private long delay = 0;
-	private boolean alive = false;
+	private static ArrayList<Job> tasks = new ArrayList<>();
 	
-	public CLK(long delay) {
-		this.delay = delay;
-	}
+	private static long delay = Configer.getBaseCLKDelay();
+	private static boolean alive = false;
 	
-	public void registerTask(Job task) {
+	private static CLK instance = new CLK();
+	
+	protected static boolean registerTask(Job task) {
+		if(tasks.contains(task)) {
+			return false;
+		}
 		tasks.add(task);
-		task.setCounter(COUNTER);
+		return true;
 	}
 	
-	public void open() {
+	protected static boolean removeTask(Job job) {
+		return tasks.remove(job);
+	}
+	
+	public static void open() {
+		times = 0;
 		if(!alive) {
 			alive = true;
-			this.start();
+			instance.start();
 		} else {
 			return;
 		}
 	}
 	
-	public void close() {
+	public static void close() {
 		alive = false;
 	}
 	
 	public void run() {
 		while(alive) {
-			for(TimerTask t : tasks) {
-				new Thread(t).start();
+			times++;
+			for(Job t : tasks) {
+				if(times % t.getValue() == 0) {
+					new Thread(t).start();
+				}
 			}
 			try {
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
 			}
-			synchronized (COUNTER) {
-				if(!COUNTER.isZero()) {
-					continue;
-				}
-			}
 		}
 	}
 	
-}
-class Counter {
-	private Object locker = new Object();
-	private int value = 0;
-
-	public void add() {
-		synchronized (locker) {
-			value++;
-		}
-	}
-	public void sub() {
-		synchronized (locker) {
-			value--;
-		}
-	}
-	public boolean isZero() {
-		synchronized (locker) {
-			return value == 0;
-		}
-	}
 }

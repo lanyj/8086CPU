@@ -5,14 +5,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import cn.jay.computer.register.ipregister.IP;
-import cn.jay.computer.register.segmentregister.CS;
 
 public class ExecuterMgr implements Serializable {
 	/**
@@ -218,26 +214,21 @@ public class ExecuterMgr implements Serializable {
 	 * execute code by executers which contains in executerManager
 	 * 
 	 * @param code
+	 * @throws Exception
 	 */
-	public static void exec(byte[] c1, byte[] c2) {
+	public static Execution exec(byte[] c1, byte[] c2) throws Exception {
 		synchronized (LOCKER) {
 			String s1 = arrayToString(c1);
 			String s2 = arrayToString(c2);
 			for (Execution e : abstractExecuters) {
-				try {
-					if (e.match(s1, s2)) {
-						System.out.println("\n" + e.getDescrible() + "\n");
-						e.exec();
-					}
-				} catch (Exception e1) {
-
-					System.out.println();
-					System.out.println(e + " - - - " + Arrays.toString(CS.getCS()) + ":" + IP.getIPLongValue());
-					e1.printStackTrace();
-					System.out.println();
+				if (e.match(s1, s2)) {
+					// System.out.println("\n" + e.getDescrible() + "\n");
+					e.exec();
+					return e;
 				}
 			}
 		}
+		return null;
 	}
 
 	public static String arrayToString(byte[] code) {

@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import cfg.Configer;
-import cn.jay.computer.utilexception.CopyArrayException;
+import cn.jay.computer.arrayutils.CopyArrayException;
 
 public class Server extends Thread {
 	ArrayList<ServerThread> serverThreads = new ArrayList<ServerThread>();
@@ -25,7 +25,6 @@ public class Server extends Thread {
 		
 		this.start();
 	}
-	
 	
 	public void close() {
 		this.alive = false;

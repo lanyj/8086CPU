@@ -2,8 +2,8 @@ package cn.jay.computer.register.segmentregister;
 
 import java.util.Arrays;
 
+import cn.jay.computer.arrayutils.CopyArrayException;
 import cn.jay.computer.register.baseregister.BaseRegister;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class CS extends BaseRegister {
 	public static final CS _CS = new CS();

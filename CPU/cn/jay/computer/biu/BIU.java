@@ -25,8 +25,9 @@ public class BIU {
 	/**
 	 * get next instruction(one byte), and auto update IP
 	 * @return
+	 * @throws Exception 
 	 */
-	public static final byte[] getInstruction() {
+	public static final byte[] getInstruction() throws Exception {
 		byte[] low = Memoryer.read(IP.getIP(), CS.getCS(), false);
 		IP.updateIP();
 		return low;
@@ -34,8 +35,9 @@ public class BIU {
 	/**
 	 * get next instruction(one byte), without auto update IP
 	 * @return
+	 * @throws Exception 
 	 */
-	public static final byte[] peekInstruction() {
+	public static final byte[] peekInstruction() throws Exception {
 		byte[] low = Memoryer.read(IP.getIP(), CS.getCS(), false);
 		return low;
 	}

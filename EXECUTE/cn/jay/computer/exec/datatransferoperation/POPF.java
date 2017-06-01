@@ -12,7 +12,7 @@ public class POPF extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {

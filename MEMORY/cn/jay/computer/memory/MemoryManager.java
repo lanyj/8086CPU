@@ -8,8 +8,6 @@ import cn.jay.computer.io_interface.IOInterface;
 import cn.jay.computer.tcp.Client;
 
 public class MemoryManager extends Client implements IOInterface {
-	
-
 	Memory memory = null;
 	
 	public MemoryManager(String modelName, long size) {
@@ -29,23 +27,13 @@ public class MemoryManager extends Client implements IOInterface {
 		is.close();
 	}
 	
-	public boolean write(long address, byte[] value) {
-		try {
-			memory.write(address, value);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+	public boolean write(long address, byte[] value) throws Exception {
+		memory.write(address, value);
+		return true;
 	}
 
-	public byte[] read(long address) {
-		try {
-			return memory.read(address);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
+	public byte[] read(long address) throws Exception {
+		return memory.read(address);
 	}
 
 	public void doJob() {

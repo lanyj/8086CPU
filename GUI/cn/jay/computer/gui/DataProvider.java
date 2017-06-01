@@ -76,7 +76,7 @@ public class DataProvider {
 		}
 		return ret;
 	}
-	public static final String getMemString(long addr, long size) {
+	public static final String getMemString(long addr, long size) throws Exception {
 		StringBuffer sb = new StringBuffer();
 		MemoryManager mm = (MemoryManager) ModelMgr.getIOModel("MAIN_MEMORY");
 		for(int i = 0;i < size;i++) {

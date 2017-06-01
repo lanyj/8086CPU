@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.jay.computer.alu.MathUtils;
-import cn.jay.computer.register.ipregister.IP;
 
 //64 bit
 public class Execution {
@@ -129,12 +128,7 @@ public class Execution {
 	}
 	
 	public static boolean match(String c1, String c2, Execution exc) throws Exception {
-		try {
-			return exc.match(c1, c2);
-		}catch (Exception e) {
-			System.out.println(exc + " -> IP = " + IP.getIPLongValue());
-		}
-		return false;
+		return exc.match(c1, c2);
 	}
 	
 	public static byte[] arrayConcat(byte[] low,byte[] high) {

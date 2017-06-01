@@ -9,7 +9,7 @@ public interface IOInterface {
 	 * @param value
 	 *            Value to write
 	 */
-	public boolean write(long address, byte[] value);
+	public boolean write(long address, byte[] value) throws Exception;
 
 	/**
 	 * Read memory,return 0 or 1 or -1
@@ -18,6 +18,6 @@ public interface IOInterface {
 	 *            Address of byte
 	 * @return Value,if no such address,return -1
 	 */
-	public byte[] read(long address);
+	public byte[] read(long address) throws Exception;
 
 }

@@ -6,7 +6,6 @@ import cn.jay.computer.memory.Memoryer;
 import cn.jay.computer.register.baseregister.BaseRegister;
 import cn.jay.computer.register.dataregister.AX;
 import cn.jay.computer.register.dataregister.BX;
-import cn.jay.computer.utilexception.CopyArrayException;
 
 public class XLAT extends Execution {
 
@@ -14,7 +13,7 @@ public class XLAT extends Execution {
 		super(opcode, operand, describle, index);
 	}
 
-	public void exec() throws CopyArrayException {
+	public void exec() throws Exception {
 		int conn = getIndex();
 		switch (conn) {
 		case -1: {
