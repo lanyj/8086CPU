@@ -14,7 +14,7 @@ START:
     SHOW PROC
     	PUSH DX
     	PUSH AX
-    	MOV AX,AX
+    	MOV AX,DX
     	
         MOV DX,0FFFFH
         OUT DX,AL
@@ -30,7 +30,7 @@ START:
     	PUSH CX
     	PUSH DX
     	
-    	MOV CX,4
+    	MOV CX,8
     	
     	MOV AX,1
     	MOV BX,1

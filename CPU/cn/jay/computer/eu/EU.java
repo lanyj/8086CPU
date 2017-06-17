@@ -34,8 +34,8 @@ class EU_JOB extends Job {
 	public void doJob() {
 		Execution exec = null;
 		try {
-			System.out.println("\n**********EU : Current CS:IP = " + MathUtils.byteArrayToLong(CS.getCS(), false, 16)
-					+ " : " + IP.getIPLongValue() + "**********\n");
+//			System.out.println("\n**********EU : Current CS:IP = " + MathUtils.byteArrayToLong(CS.getCS(), false, 16)
+//					+ " : " + IP.getIPLongValue() + "**********\n");
 			byte[] ins = BIU.getInstruction();
 
 			exec = ExecuterMgr.exec(ins, BIU.peekInstruction());
