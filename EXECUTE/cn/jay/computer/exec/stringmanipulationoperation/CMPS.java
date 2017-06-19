@@ -27,11 +27,7 @@ public class CMPS extends Execution {
 
 			byte[] src = Memoryer.read(SI.getSI(), env.getDATA(), W);
 			byte[] des = Memoryer.read(DI.getDI(), ES.getES(), W);
-			if (W) {
-				LongALU.sub16(src, des);
-			} else {
-				LongALU.sub8(src, des);
-			}
+			LongALU.sub(src, des);
 
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);
 			if (df) {

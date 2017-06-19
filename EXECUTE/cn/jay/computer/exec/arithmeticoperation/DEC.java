@@ -42,19 +42,11 @@ public class DEC extends Execution {
 			if (addr == null) {
 				byte[] a = RegisterMgr.getDATA(RM, W);
 
-				if (W) {
-					LongALU.sub16(a, ONE16);
-				} else {
-					LongALU.sub8(a, ONE8);
-				}
+				LongALU.sub(a, ONE16);
 				RegisterMgr.setDATA(RM, W, a);
 			} else {
 				byte[] a = Memoryer.read(addr, env.getDATA(), W);
-				if (W) {
-					LongALU.sub16(a, ONE16);
-				} else {
-					LongALU.sub8(a, ONE8);
-				}
+				LongALU.sub(a, ONE16);
 				Memoryer.write(addr, env.getDATA(), a, W);
 			}
 
@@ -63,7 +55,7 @@ public class DEC extends Execution {
 		case 1: {
 			String REG = getOperand("REG");
 			byte[] a = RegisterMgr.getDATA(REG, true);
-			LongALU.sub16(a, ONE16);
+			LongALU.sub(a, ONE16);
 			RegisterMgr.setDATA(REG, true, a);
 			break;
 		}

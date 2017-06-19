@@ -42,11 +42,7 @@ public class ADD extends Execution {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
 			a1 = RegisterMgr.getDATA(REG, W);
-			if (W) {
-				LongALU.add16(a1, a2);
-			} else {
-				LongALU.add8(a1, a2);
-			}
+			LongALU.add(a1, a2);
 
 			if (D) {
 				RegisterMgr.setDATA(REG, W, a1);
@@ -79,20 +75,20 @@ public class ADD extends Execution {
 				a1 = RegisterMgr.getDATA(RM, W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.add16(a1, a2);
+					LongALU.add(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.add8(a1, a2);
+					LongALU.add(a1, a2);
 				}
 				RegisterMgr.setDATA(RM, W, a1);
 			} else {
 				a1 = Memoryer.read(addr, env.getDATA(), W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.add16(a1, a2);
+					LongALU.add(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.add8(a1, a2);
+					LongALU.add(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -107,12 +103,12 @@ public class ADD extends Execution {
 			if (W) {
 				a1 = AX.getAX();
 				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-				LongALU.add16(a1, a2);
+				LongALU.add(a1, a2);
 				AX.setAX(a1);
 			} else {
 				a1 = AX.getAL();
 				a2 = BIU.getInstruction();
-				LongALU.add8(a1, a2);
+				LongALU.add(a1, a2);
 				AX.setAL(a1);
 			}
 			break;

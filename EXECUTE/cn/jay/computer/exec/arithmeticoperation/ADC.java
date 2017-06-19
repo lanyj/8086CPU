@@ -53,18 +53,10 @@ public class ADC extends Execution {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 			}
 			if (FLAGS.getFLAGS(FLAGS.CF)) {
-				if (W) {
-					LongALU.add16(a2, ONE16);
-				} else {
-					LongALU.add8(a2, ONE8);
-				}
+				LongALU.add(a2, ONE16);
 			}
 			a1 = RegisterMgr.getDATA(REG, W);
-			if (W) {
-				LongALU.add16(a1, a2);
-			} else {
-				LongALU.add8(a1, a2);
-			}
+				LongALU.add(a1, a2);
 
 			if (D) {
 				RegisterMgr.setDATA(REG, W, a1);
@@ -98,15 +90,15 @@ public class ADC extends Execution {
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
 					if (FLAGS.getFLAGS(FLAGS.CF)) {
-						LongALU.add16(a2, ONE16);
+						LongALU.add(a2, ONE16);
 					}
-					LongALU.add16(a1, a2);
+					LongALU.add(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
 					if (FLAGS.getFLAGS(FLAGS.CF)) {
-						LongALU.add8(a2, ONE8);
+						LongALU.add(a2, ONE8);
 					}
-					LongALU.add8(a1, a2);
+					LongALU.add(a1, a2);
 				}
 				RegisterMgr.setDATA(RM, W, a1);
 			} else {
@@ -114,15 +106,15 @@ public class ADC extends Execution {
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
 					if (FLAGS.getFLAGS(FLAGS.CF)) {
-						LongALU.add16(a2, ONE16);
+						LongALU.add(a2, ONE16);
 					}
-					LongALU.add16(a1, a2);
+					LongALU.add(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
 					if (FLAGS.getFLAGS(FLAGS.CF)) {
-						LongALU.add8(a2, ONE8);
+						LongALU.add(a2, ONE8);
 					}
-					LongALU.add8(a1, a2);
+					LongALU.add(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -138,17 +130,17 @@ public class ADC extends Execution {
 				a1 = AX.getAX();
 				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
 				if (FLAGS.getFLAGS(FLAGS.CF)) {
-					LongALU.add16(a2, ONE16);
+					LongALU.add(a2, ONE16);
 				}
-				LongALU.add16(a1, a2);
+				LongALU.add(a1, a2);
 				AX.setAX(a1);
 			} else {
 				a1 = AX.getAL();
 				a2 = BIU.getInstruction();
 				if (FLAGS.getFLAGS(FLAGS.CF)) {
-					LongALU.add8(a2, ONE8);
+					LongALU.add(a2, ONE8);
 				}
-				LongALU.add8(a1, a2);
+				LongALU.add(a1, a2);
 				AX.setAL(a1);
 			}
 			break;

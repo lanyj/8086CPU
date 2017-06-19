@@ -30,10 +30,10 @@ public class LODS extends Execution {
 			byte[] des = Memoryer.read(SI.getSI(), env.getDATA(), W);
 			if (W) {
 				src = AX.getAX();
-				LongALU.sub16(src, des);
+				LongALU.sub(src, des);
 			} else {
 				src = AX.getAL();
-				LongALU.sub8(src, des);
+				LongALU.sub(src, des);
 			}
 
 			boolean df = FLAGS.getFLAGS(FLAGS.DF);

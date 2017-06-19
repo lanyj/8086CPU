@@ -34,20 +34,12 @@ public class NOT extends Execution {
 			byte[] a2 = null;
 			if (addr == null) {
 				a2 = RegisterMgr.getDATA(RM, W);
-				if (W) {
-					LongALU.not16(a2);
-				} else {
-					LongALU.not8(a2);
-				}
+				LongALU.not(a2);
 				RegisterMgr.setDATA(RM, W, a2);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
 
-				if (W) {
-					LongALU.not16(a2);
-				} else {
-					LongALU.not8(a2);
-				}
+				LongALU.not(a2);
 				Memoryer.write(addr, env.getDATA(), a2, W);
 			}
 

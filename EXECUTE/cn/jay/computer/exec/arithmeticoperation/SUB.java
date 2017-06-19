@@ -44,18 +44,10 @@ public class SUB extends Execution {
 			a1 = RegisterMgr.getDATA(REG, W);
 
 			if (D) {
-				if (W) {
-					LongALU.sub16(a1, a2);
-				} else {
-					LongALU.sub8(a1, a2);
-				}
+				LongALU.sub(a1, a2);
 				RegisterMgr.setDATA(REG, W, a1);
 			} else {
-				if (W) {
-					LongALU.sub16(a2, a1);
-				} else {
-					LongALU.sub8(a2, a1);
-				}
+				LongALU.sub(a2, a1);
 				if(addr == null) {
 					RegisterMgr.setDATA(RM, W, a2);
 				} else{
@@ -84,20 +76,20 @@ public class SUB extends Execution {
 				a1 = RegisterMgr.getDATA(RM, W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.sub16(a1, a2);
+					LongALU.sub(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.sub8(a1, a2);
+					LongALU.sub(a1, a2);
 				}
 				RegisterMgr.setDATA(RM, W, a1);
 			} else {
 				a1 = Memoryer.read(addr, env.getDATA(), W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.sub16(a1, a2);
+					LongALU.sub(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.sub8(a1, a2);
+					LongALU.sub(a1, a2);
 				}
 				Memoryer.write(addr, env.getDATA(), a1, W);
 			}
@@ -112,12 +104,12 @@ public class SUB extends Execution {
 			if (W) {
 				a1 = AX.getAX();
 				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-				LongALU.sub16(a1, a2);
+				LongALU.sub(a1, a2);
 				AX.setAX(a1);
 			} else {
 				a1 = AX.getAL();
 				a2 = BIU.getInstruction();
-				LongALU.sub8(a1, a2);
+				LongALU.sub(a1, a2);
 				AX.setAL(a1);
 			}
 			break;

@@ -40,10 +40,10 @@ public class NEG extends Execution {
 
 				if (W) {
 					ret = ZERO16.clone();
-					LongALU.sub16(ret, a);
+					LongALU.sub(ret, a);
 				} else {
 					ret = ZERO8.clone();
-					LongALU.sub8(ret, a);
+					LongALU.sub(ret, a);
 				}
 				RegisterMgr.setDATA(RM, W, ret);
 			} else {
@@ -52,10 +52,10 @@ public class NEG extends Execution {
 				if (W) {
 					a = Memoryer.read(addr, env.getDATA(), W);
 					ret = ZERO16.clone();
-					LongALU.sub16(ret, a);
+					LongALU.sub(ret, a);
 				} else {
 					ret = ZERO8.clone();
-					LongALU.sub8(ret, a);
+					LongALU.sub(ret, a);
 				}
 				Memoryer.write(addr, env.getDATA(), ret, W);
 			}

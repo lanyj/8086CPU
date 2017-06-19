@@ -42,11 +42,7 @@ public class TEST extends Execution {
 			}
 			a1 = RegisterMgr.getDATA(REG, W);
 
-			if (W) {
-				LongALU.and16(a1, a2);
-			} else {
-				LongALU.and8(a1, a2);
-			}
+			LongALU.and(a1, a2);
 
 			break;
 		}
@@ -67,19 +63,19 @@ public class TEST extends Execution {
 				a1 = RegisterMgr.getDATA(RM, W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.and16(a1, a2);
+					LongALU.and(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.and8(a1, a2);
+					LongALU.and(a1, a2);
 				}
 			} else {
 				a1 = Memoryer.read(addr, env.getDATA(), W);
 				if (W) {
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.and16(a1, a2);
+					LongALU.and(a1, a2);
 				} else {
 					a2 = BIU.getInstruction();
-					LongALU.and8(a1, a2);
+					LongALU.and(a1, a2);
 				}
 			}
 			break;
@@ -93,11 +89,11 @@ public class TEST extends Execution {
 			if (W) {
 				a1 = AX.getAX();
 				a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-				LongALU.and16(a1, a2);
+				LongALU.and(a1, a2);
 			} else {
 				a1 = AX.getAL();
 				a2 = BIU.getInstruction();
-				LongALU.and8(a1, a2);
+				LongALU.and(a1, a2);
 			}
 			break;
 		}

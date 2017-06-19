@@ -2,7 +2,7 @@ package cfg;
 
 public class Configer {
 	public static final long getBaseCLKDelay() {
-		return 10;
+		return 1;
 	}
 	public static final int getRegisterSize() {
 		return 16;

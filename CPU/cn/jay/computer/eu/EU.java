@@ -14,12 +14,12 @@ public class EU {
 
 	public static final EU_JOB JOB = new EU_JOB();
 
-	public static boolean deploy() {
-		return JOB.deploy();
+	public static void deploy() {
+		JOB.deploy();
 	}
 
-	public static boolean undeploy() {
-		return JOB.undeploy();
+	public static void undeploy() {
+		JOB.undeploy();
 	}
 
 }

@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.TimerTask;
 
 import cn.jay.modelprovider.ModelMgr;
+import modelinterface.ModelInterface;
 
-public abstract class Job extends TimerTask {
-	
+public abstract class Job extends TimerTask implements ModelInterface {
+	private boolean alive = false;
 	private String modelName = new Date().toString();
 	
 	private long value = 1;
@@ -16,25 +17,25 @@ public abstract class Job extends TimerTask {
 		this.value = value;
 	}
 	
-	public boolean deploy() {
-		ModelMgr.addCLKJob(this);
+	public final void deploy() {
+		alive = true;
+		ModelMgr.addModel(this);
 		
-		return CLK.registerTask(this);
+		CLK.registerTask(this);
 	}
 	
-	public boolean undeploy() {
-		ModelMgr.removeCLKJob(modelName);
-		
-		return CLK.removeTask(this);
+	public final void undeploy() {
+		alive = false;
+		CLK.removeTask(this);
 	}
 	
 	public abstract void doJob();
 	
-	public void setValue(long value) {
+	public final void setValue(long value) {
 		this.value = value;
 	}
 	
-	public long getValue() {
+	public final long getValue() {
 		return this.value;
 	}
 	
@@ -43,8 +44,16 @@ public abstract class Job extends TimerTask {
 		doJob();
 	}
 
+	public void setModelName(String name) {
+		this.modelName = name;
+	}
+	
 	public String getModelName() {
 		return this.modelName;
+	}
+	
+	public boolean isRunning() {
+		return alive;
 	}
 	
 }

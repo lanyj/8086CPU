@@ -42,19 +42,11 @@ public class INC extends Execution {
 			if (addr == null) {
 				byte[] a = RegisterMgr.getDATA(RM, W);
 
-				if (W) {
-					LongALU.add16(a, ONE16);
-				} else {
-					LongALU.add8(a, ONE8);
-				}
+				LongALU.add(a, ONE16);
 				RegisterMgr.setDATA(RM, W, a);
 			} else {
 				byte[] a = Memoryer.read(addr, env.getDATA(), W);
-				if (W) {
-					LongALU.add16(a, ONE16);
-				} else {
-					LongALU.add8(a, ONE8);
-				}
+				LongALU.add(a, ONE16);
 				Memoryer.write(addr, env.getDATA(), a, W);
 			}
 
@@ -63,7 +55,7 @@ public class INC extends Execution {
 		case 1: {
 			String REG = getOperand("REG");
 			byte[] a = RegisterMgr.getDATA(REG, true);
-			LongALU.add16(a, ONE16);
+			LongALU.add(a, ONE16);
 			RegisterMgr.setDATA(REG, true, a);
 			break;
 		}

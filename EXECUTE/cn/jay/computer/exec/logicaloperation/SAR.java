@@ -42,19 +42,11 @@ public class SAR extends Execution {
 			byte[] a2 = null;
 			if (addr == null) {
 				a2 = RegisterMgr.getDATA(RM, W);
-				if (W) {
-					LongALU.sar16(a2, cl, RM.equals("000"));
-				} else {
-					LongALU.sar8(a2, cl, RM.equals("000"));
-				}
+				LongALU.sar(a2, cl, RM.equals("000"));
 				RegisterMgr.setDATA(RM, W, a2);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
-				if (W) {
-					LongALU.sar16(a2, cl, false);
-				} else {
-					LongALU.sar8(a2, cl, false);
-				}
+				LongALU.sar(a2, cl, false);
 				Memoryer.write(addr, env.getDATA(), a2, W);
 			}
 

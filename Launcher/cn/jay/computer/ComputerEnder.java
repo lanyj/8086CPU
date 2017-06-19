@@ -6,20 +6,23 @@ import java.util.Set;
 
 import cn.jay.computer.clk.CLK;
 import cn.jay.computer.port.PortMgr;
-import cn.jay.computer.tcp.Client;
 import cn.jay.modelprovider.ModelMgr;
+import modelinterface.ModelInterface;
 
 public class ComputerEnder {
 	public static final void end() {
+		System.out.println("Starting shut down...");
 		CLK.close();
 		
 		PortMgr.PORT_SERVER.close();
 		
-		Set<Entry<String, Client>> mods = ModelMgr.IO_MODELS.entrySet();
-		for (Iterator<Entry<String, Client>> mod = mods.iterator(); mod.hasNext();) {
-			mod.next().getValue().undeploy();
+		Set<Entry<String, ModelInterface>> mods = ModelMgr.MODELS.entrySet();
+		for (Iterator<Entry<String, ModelInterface>> mod = mods.iterator(); mod.hasNext();) {
+			ModelInterface p = mod.next().getValue();
+			p.undeploy();
+			System.out.println(p.getModelName() + " - - - - shut down.");
 		}
 		
-		
+		System.out.println("Shut down complete...");
 	}
 }

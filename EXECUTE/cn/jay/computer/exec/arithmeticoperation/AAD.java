@@ -29,7 +29,7 @@ public class AAD extends Execution {
 		case 0: {
 			byte[] low = multi8(AX.getAH(), TEN8);
 
-			LongALU.add8(low, AX.getAL());
+			LongALU.add(low, AX.getAL());
 			AX.setAL(low);
 
 			AX.setAH(new byte[8]);

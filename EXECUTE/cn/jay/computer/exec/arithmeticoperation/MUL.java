@@ -42,7 +42,7 @@ public class MUL extends Execution {
 			}
 			if (W) {
 				a1 = AX.getAX();
-				a1 = LongALU.multi16(a1, a2);
+				a1 = LongALU.mul(a1, a2);
 				byte[] high = new byte[16];
 				byte[] low = new byte[16];
 				arraySplit(high, low, a1);
@@ -50,7 +50,7 @@ public class MUL extends Execution {
 				DX.setDX(high);
 			} else {
 				a1 = AX.getAL();
-				a1 = LongALU.multi8(a1, a2);
+				a1 = LongALU.mul(a1, a2);
 				AX.setAX(a1);
 			}
 			break;

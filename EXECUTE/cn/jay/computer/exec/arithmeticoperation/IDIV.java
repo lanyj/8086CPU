@@ -46,7 +46,7 @@ public class IDIV extends Execution {
 				p2 = AX.getAX();
 
 				byte[] value = arrayConcat(p2, p1);
-				LongALU.idivide16(value, a2);
+				LongALU.idiv(value, a2);
 
 				byte[] high = new byte[16];
 				byte[] low = new byte[16];
@@ -56,7 +56,7 @@ public class IDIV extends Execution {
 				DX.setDX(high);
 			} else {
 				byte[] value = AX.getAX();
-				LongALU.idivide8(value, a2);
+				LongALU.idiv(value, a2);
 
 				AX.setAX(value);
 			}

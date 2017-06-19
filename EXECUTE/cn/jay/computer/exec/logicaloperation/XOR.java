@@ -43,18 +43,10 @@ public class XOR extends Execution {
 			a1 = RegisterMgr.getDATA(RM, W);
 
 			if (D) {
-				if (W) {
-					LongALU.xor16(a1, a2);
-				} else {
-					LongALU.xor8(a1, a2);
-				}
+				LongALU.xor(a1, a2);
 				RegisterMgr.setDATA(RM, W, a1);
 			} else {
-				if (W) {
-					LongALU.xor16(a2, a1);
-				} else {
-					LongALU.xor8(a2, a1);
-				}
+				LongALU.xor(a2, a1);
 				if(addr == null) {
 					RegisterMgr.setDATA(RM, W, a2);
 				} else{
@@ -82,10 +74,10 @@ public class XOR extends Execution {
 					a1 = RegisterMgr.getDATA(RM, W);
 					if (W) {
 						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.xor16(a1, a2);
+						LongALU.xor(a1, a2);
 					} else {
 						a2 = BIU.getInstruction();
-						LongALU.xor8(a1, a2);
+						LongALU.xor(a1, a2);
 					}
 				} catch (Exception e1) {
 				}
@@ -98,10 +90,10 @@ public class XOR extends Execution {
 					a1 = Memoryer.read(addr, env.getDATA(), W);
 					if (W) {
 						a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-						LongALU.xor16(a1, a2);
+						LongALU.xor(a1, a2);
 					} else {
 						a2 = BIU.getInstruction();
-						LongALU.xor8(a1, a2);
+						LongALU.xor(a1, a2);
 					}
 				} catch (Exception e1) {
 				}
@@ -119,12 +111,12 @@ public class XOR extends Execution {
 				if (W) {
 					a1 = AX.getAX();
 					a2 = arrayConcat(BIU.getInstruction(), BIU.getInstruction());
-					LongALU.xor16(a1, a2);
+					LongALU.xor(a1, a2);
 					AX.setAX(a1);
 				} else {
 					a1 = AX.getAL();
 					a2 = BIU.getInstruction();
-					LongALU.xor8(a1, a2);
+					LongALU.xor(a1, a2);
 					AX.setAL(a1);
 				}
 			} catch (Exception e1) {

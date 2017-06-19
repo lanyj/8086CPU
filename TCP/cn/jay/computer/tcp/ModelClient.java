@@ -8,8 +8,9 @@ import java.util.Date;
 
 import cfg.Configer;
 import cn.jay.modelprovider.ModelMgr;
+import modelinterface.ModelInterface;
 
-public abstract class Client extends Thread {
+public abstract class ModelClient extends Thread implements ModelInterface {
 	protected Socket socket = null;
 	protected InputStream in = null;
 	protected OutputStream out = null;
@@ -18,7 +19,7 @@ public abstract class Client extends Thread {
 	protected final byte[] BUFFER = new byte[Configer.getCPUPortCount() * 2];
 	protected String modelName = new Date().toString();
 	
-	public Client(String modelName) {
+	public ModelClient(String modelName) {
 		this.modelName = modelName;
 		try {
 			init();
@@ -27,28 +28,12 @@ public abstract class Client extends Thread {
 		}
 	}
 
-	public boolean deploy() {
-		this.start();
-		
-		return ModelMgr.addIO_Model(this);
-	}
-	
-	public boolean undeploy() {
-		this.close();
-		
-		return ModelMgr.removeIO_Model(this.getModelName()) == this;
-	}
-	
 	private void init() throws Exception {
 		socket = new Socket(Configer.getCPUConnectHost(), Configer.getCPUConnectPort());
 		out = socket.getOutputStream();
 		in = socket.getInputStream();
 	}
 
-	public String getModelName() {
-		return modelName;
-	}
-	
 	@Override
 	public final void run() {
 		while (alive) {
@@ -57,6 +42,9 @@ public abstract class Client extends Thread {
 		}
 	}
 	
+	/**
+	 * do what you want to do
+	 */
 	public abstract void doJob();
 	
 	protected void receive() {
@@ -68,7 +56,7 @@ public abstract class Client extends Thread {
 		}
 	}
 	
-	protected void send() {
+	protected final void send() {
 		try {
 			out.write(BUFFER, 0, BUFFER.length);
 			out.flush();
@@ -88,4 +76,27 @@ public abstract class Client extends Thread {
 			}
 		}
 	}
+	
+	public void deploy() {
+		this.start();
+		ModelMgr.addModel(this);
+	}
+	
+	public void undeploy() {
+		this.close();
+	}
+	
+	@Override
+	public boolean isRunning() {
+		return alive;
+	}
+	
+	public void setModelName(String name) {
+		this.modelName = name;
+	}
+	
+	public String getModelName() {
+		return modelName;
+	}
+	
 }

@@ -5,9 +5,9 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import cn.jay.computer.io_interface.IOInterface;
-import cn.jay.computer.tcp.Client;
+import cn.jay.computer.tcp.ModelClient;
 
-public class MemoryManager extends Client implements IOInterface {
+public class MemoryManager extends ModelClient implements IOInterface {
 	Memory memory = null;
 	
 	public MemoryManager(String modelName, long size) {
@@ -39,5 +39,5 @@ public class MemoryManager extends Client implements IOInterface {
 	public void doJob() {
 		//TODO
 	}
-	
+
 }

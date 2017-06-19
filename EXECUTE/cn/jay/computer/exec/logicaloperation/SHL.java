@@ -42,19 +42,11 @@ public class SHL extends Execution {
 			byte[] a2 = null;
 			if (addr == null) {
 				a2 = RegisterMgr.getDATA(RM, W);
-				if (W) {
-					LongALU.shl16(a2, cl, RM.equals("000"));
-				} else {
-					LongALU.shl8(a2, cl, RM.equals("000"));
-				}
+				LongALU.shl(a2, cl, RM.equals("000"));
 				RegisterMgr.setDATA(RM, W, a2);
 			} else {
 				a2 = Memoryer.read(addr, env.getDATA(), W);
-				if (W) {
-					LongALU.shl16(a2, cl, false);
-				} else {
-					LongALU.shl8(a2, cl, false);
-				}
+				LongALU.shl(a2, cl, false);
 				Memoryer.write(addr, env.getDATA(), a2, W);
 			}
 

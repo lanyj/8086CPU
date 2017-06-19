@@ -46,7 +46,7 @@ public class DIV extends Execution {
 				p2 = AX.getAX();
 
 				byte[] value = arrayConcat(p2, p1);
-				LongALU.divide16(value, a2);
+				LongALU.div(value, a2);
 
 				byte[] high = new byte[16];
 				byte[] low = new byte[16];
@@ -56,7 +56,7 @@ public class DIV extends Execution {
 				DX.setDX(high);
 			} else {
 				byte[] value = AX.getAX();
-				LongALU.divide8(value, a2);
+				LongALU.div(value, a2);
 
 				AX.setAX(value);
 			}
